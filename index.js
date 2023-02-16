@@ -1,11 +1,3 @@
-// // way 1 naming convention should not be same
-// const books2 = require('./data/books');
-// console.log(books2.books[2]);
-
-// // way 2 naming convention should be same
-// const {books,authors} = require('./data/books');
-// console.log(books);
-
 const express=require('express');
 const router = require('./routers/router');
 const router2 = require('./routers/routerforDB');

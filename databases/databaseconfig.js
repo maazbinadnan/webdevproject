@@ -3,12 +3,12 @@ var config = {
     server:'HP-PAVILION-15',
     user:'maazadnan',
     password:'123',
-    database:'node',
+    database:'webdevproject',
     port:1433,
     options:{
         encrypt:false,
         trustServerCertificate:true,
-        //trustedConnection:true, //use this for windows authentication
+        enableArithAbort:true
     },
     pool:{
         max:10,
@@ -16,9 +16,6 @@ var config = {
         idleTimeoutMillis:30000        
     }
 };
-
-
-
 let pool; 
 getPool = () => {
     try {
