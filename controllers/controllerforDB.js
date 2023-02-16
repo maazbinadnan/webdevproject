@@ -1,6 +1,6 @@
 const getPool = require('../databases/databaseconfig.js');
 const bcrypt = require('bcrypt'); 
-//const emailregex=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.
+const emailregex=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 // exports.alldata = (req, res) => {
 //     try {
         
@@ -88,7 +88,34 @@ const bcrypt = require('bcrypt');
         
 // }
 
-exports.printing= (req, res) => {
-    
+exports.registeruser = async (req, res) => {
+    let result;
+    try {
+const {username,email,password}= req.body;
+const hashedPassword = await bcrypt.hash(req.body.password, 10);
+getPool().connect().then(async () => {
+    result = await getPool().request().query(`select Count(*) as count from users where username = '${username}'`);
+    if (result.recordset[0].count>0) {
+        res.send("username already exists");
+        
+    }else{
+        
+    }
+})
+
+
+if (emailregex.test(email)) {
+    res.send("email is valid");
+}else {
+    res.send("email is not valid");
 }
+    
+} 
+catch (error) {
+    console.log(error);
+}
+}
+    
+
+
 

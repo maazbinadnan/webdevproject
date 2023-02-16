@@ -3,7 +3,7 @@ var config = {
     server:'HP-PAVILION-15',
     user:'maazadnan',
     password:'123',
-    database:'webdevproject',
+    database:'web dev project',
     port:1433,
     options:{
         encrypt:false,
