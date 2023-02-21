@@ -1,5 +1,4 @@
 const getPool = require('../databases/databaseconfig.js');
-const mssql = require('mssql');
 const bcrypt = require('bcrypt'); 
 const emailregex=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
@@ -13,6 +12,7 @@ exports.registeruser = async (req, res) => {
         const hashedpassword = await bcrypt.hash(req.body.password, 10);
         await registeruser(req.body.username,req.body.email,hashedpassword);
         res.send("user registered");
+
     } else if (checkemail(req.body.email)) {
         const userexist=await checkuserexist(req.body.username,req.body.email);
         if(userexist==false){
