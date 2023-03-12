@@ -1,15 +1,21 @@
 const bcrypt = require('bcrypt'); 
 const register=require('../funcsusedbycontrollers/registerfuncs.js');
 const login = require('../funcsusedbycontrollers/loginfuncs.js');
+const jwt = require('../funcsusedbycontrollers/jwttoken.js');
 
 exports.login = async (req, res) => { //user can only login through email or username
-    let usingusername=false; //create a button and toggle this variable
+    let usingusername=true; //create a button and toggle this variable
     try {
         if (usingusername) {
             switch (await login.checkusernamelogin(req.body.username)) {
                 case true: //if username exists
                     if (await bcrypt.compare(req.body.password, await login.getpasswordfromusername(req.body.username))) { // compare db password with password entered thru login
-                     res.send("user logged in");  // replace with cookie and jwt                             
+                    token = await jwt.createtokenusername(req.body.username);// replace with cookie and jwt
+                    console.log(token);
+                    res.json({
+                        token: token,
+                        message : "user logged in"
+                    });                            
                     } else {
                     res.send("password is incorrect");
                     }
