@@ -1,7 +1,7 @@
-const jwt = require('jsonwebtoken');
+const jwt = require('../funcsusedbycontrollers/jwttoken.js');
 const bcrypt = require('bcrypt'); 
 const register=require('../funcsusedbycontrollers/registerfuncs.js');
-const login = require('../funcsusedbycontrollers/loginfuncs.js');
+
 
 exports.registeruser = async (req, res) => {
  try {
@@ -11,13 +11,18 @@ exports.registeruser = async (req, res) => {
      else if (register.checkemail(req.body.email) && await register.checkuserexist(req.body.username,req.body.email)) {
         const hashedpassword = await bcrypt.hash(req.body.password, 10);
         const result = await register.registeruser(req.body.username,req.body.email,hashedpassword);
+        const token = await jwt.createtokenemail(req.body.email);
         console.log(result);
-        res.send("user registered");
+        res.json({
+            token: token,
+            message : "user created",
+            redirect: "user redirected to " + req.body.username + "/home"
+        }); //redirect to home page
 
     } else if (register.checkemail(req.body.email)) {
         const userexist=await register.checkuserexist(req.body.username,req.body.email);
         if(userexist==false){
-            res.send("user already exists");
+            res.send("user already exists"); 
         }
       }    
  } catch (error) {
@@ -25,12 +30,6 @@ exports.registeruser = async (req, res) => {
  }
 }
 
-exports.getallusers = async (req, res) => {
-    const result = await login.getpasswordfromusername(req.body.username);
-    console.log(result);
-    res.send(result);
-}
-    
 
 
 

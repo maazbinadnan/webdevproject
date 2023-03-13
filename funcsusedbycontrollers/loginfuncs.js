@@ -1,3 +1,4 @@
+//database functions for user 
 const getPool = require('../databases/databaseconfig.js');
 
 //usernamelogin function to check if user exists
@@ -62,4 +63,26 @@ try {
 } catch (error) {
     return error;
 }
+}
+exports.getdetailsfortoken = async function(value){
+  try {
+      const pool = await getPool().connect();
+      const result = await pool.request()
+      .input('identifier',value)
+      .execute('getdetailsfortoken');
+      return result.recordset[0];
+  } catch (error) {
+      return error;
+  }
+}
+exports.getusernamefromemail = async function(email){
+  try {
+      const pool = await getPool().connect();
+      const result = await pool.request()
+      .input('email', email)
+      .execute('getusernamefromemail');
+      return result.recordset[0].username;
+  } catch (error) {
+      return error;
+  }
 }
