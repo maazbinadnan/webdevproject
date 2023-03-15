@@ -21,6 +21,7 @@ exports.checkusernamelogin = async function(username){
         return err;
       }
 }
+
 //email login function to check if user exists
 exports.checkemaillogin = async function(email){
     try {

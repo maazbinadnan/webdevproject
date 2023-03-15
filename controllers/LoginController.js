@@ -15,7 +15,7 @@ exports.login = async (req, res) => { //user can only login through email or use
                     res.json({
                         token: token,
                         message : "user logged in",
-                        redirect: "user redirected to " + req.body.username + "/home"
+                        redirect: "user redirected to " + req.body.username + "/home" //redirecting user to his home page
                     });                            
                     } else {
                     res.send("password is incorrect");
