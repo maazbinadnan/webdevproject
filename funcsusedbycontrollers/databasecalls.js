@@ -1,4 +1,4 @@
-const getPool = require('../databases/databaseconfig.js');
+const getPool = require('../databases/databaseconfigforuser.js');
 
 exports.updatepassword = async function(username, password){
     try {
@@ -35,4 +35,15 @@ exports.getHpDetails = async function(username){
     } catch (error) {
         return error;
     }
+}
+exports.searchmovies=async function(moviename){
+    try {
+    const pool = await getPool().connect();
+    const result = await pool.request()
+    .input('movie_name', moviename)
+    .execute('search_movies');
+    return result;
+}catch (error) {
+    return error;
+}
 }

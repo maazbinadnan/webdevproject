@@ -1,7 +1,7 @@
 const homerouter = require('express').Router();
 const jwt = require('../funcsusedbycontrollers/jwttoken.js');
 const HPcontroller = require('../controllers/UserHpController');
-
+const MovieController = require('../controllers/MoviePageController');
 homerouter.use(async function(req,res,next){ //first middleware to check if the token is valid and username in request matches with the one in token
     try{
     const token = req.headers.authorization.split(" ")[1];
@@ -20,7 +20,8 @@ homerouter.use(async function(req,res,next){ //first middleware to check if the 
         res.send("no token found");
     }
 })
-homerouter.get("/home",HPcontroller.showHpdetails); 
+homerouter.get("/home" ,HPcontroller.showHpdetails); 
 homerouter.post("/changepassword",HPcontroller.changepassword);
 homerouter.post("/changeemail",HPcontroller.changeemail);
+homerouter.post("/searchmovies",MovieController.searchmovies);
 module.exports=homerouter

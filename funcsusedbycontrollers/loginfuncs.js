@@ -1,5 +1,5 @@
 //database functions for user 
-const getPool = require('../databases/databaseconfig.js');
+const getPool = require('../databases/databaseconfigforuser.js');
 
 //usernamelogin function to check if user exists
 exports.checkusernamelogin = async function(username){
