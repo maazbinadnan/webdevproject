@@ -20,8 +20,12 @@ homerouter.use(async function(req,res,next){ //first middleware to check if the 
         res.send("no token found");
     }
 })
+
 homerouter.get("/home" ,HPcontroller.showHpdetails); 
 homerouter.post("/changepassword",HPcontroller.changepassword);
 homerouter.post("/changeemail",HPcontroller.changeemail);
+homerouter.get("/allmovies",MovieController.getmoviepages)
 homerouter.post("/searchmovies",MovieController.searchmovies);
+homerouter.post("/requestmovie",MovieController.requestmovie)
+homerouter.post("/addreview/:movieID",MovieController.addreview)
 module.exports=homerouter

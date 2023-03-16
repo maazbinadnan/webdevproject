@@ -47,3 +47,43 @@ exports.searchmovies=async function(moviename){
     return error;
 }
 }
+
+exports.getmoviepages= async function(pagenum, pagesize){
+    try {
+    const pool = await getPool().connect();
+    const result = await pool.request()
+    .input('pagenum', pagenum)
+    .input('pagesize', pagesize)
+    .execute('moviepagination');
+    return result;
+    } catch (error) {
+        return error;
+    }
+}
+exports.requestmovie=async function(moviename,moviedirector){
+    try {
+    const pool = await getPool().connect();
+    const result = await pool.request()
+    .input('moviename', moviename)
+    .input('movieDirector', moviedirector)
+    .execute('requestmovie');
+    return result;
+    } catch (error) {
+        return error;
+    }
+
+}
+exports.addreview = async function(username,movieID,rating,comments){
+    try {
+        const pool = await getPool().connect();
+        const result = await pool.request()
+        .input('username', username)
+        .input('movieID', movieID)
+        .input('rating', rating)
+        .input('comments', comments)
+        .execute('addreview');
+        return result;
+        } catch (error) {
+            return error;
+        }
+}
