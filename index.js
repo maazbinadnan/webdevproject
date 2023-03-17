@@ -3,7 +3,7 @@ const loginrouter = require('./routers/loginregrouter');
 const registerrouter = require('./routers/registerrouter');
 const homerouter = require('./routers/userHomerouter');
 const app=express();
-const bcrypt = require('bcrypt');
+
 const Bodyparser = require('body-parser');
 app.use(Bodyparser.urlencoded({extended:false}));
 app.use(express.json()); // parse json datas

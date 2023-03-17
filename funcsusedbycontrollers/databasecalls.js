@@ -1,4 +1,5 @@
 const getPool = require('../databases/databaseconfigforuser.js');
+const sql = require('mssql') 
 
 exports.updatepassword = async function(username, password){
     try {
@@ -36,24 +37,14 @@ exports.getHpDetails = async function(username){
         return error;
     }
 }
-exports.searchmovies=async function(moviename){
-    try {
-    const pool = await getPool().connect();
-    const result = await pool.request()
-    .input('movie_name', moviename)
-    .execute('search_movies');
-    return result;
-}catch (error) {
-    return error;
-}
-}
 
-exports.getmoviepages= async function(pagenum, pagesize){
+exports.getmoviepages= async function(pagenum, pagesize,order){
     try {
     const pool = await getPool().connect();
     const result = await pool.request()
     .input('pagenum', pagenum)
     .input('pagesize', pagesize)
+    .input('order',order)
     .execute('moviepagination');
     return result;
     } catch (error) {
@@ -86,4 +77,54 @@ exports.addreview = async function(username,movieID,rating,comments){
         } catch (error) {
             return error;
         }
+}
+ 
+ // movie search and filtering all calls
+exports.searchmovies=async function(moviename,sortorder){ //by name
+    try {
+    const pool = await getPool().connect();
+    const result = await pool.request()
+    .input('movieName', moviename)
+    .input('sortorder', sortorder)
+    .execute('searchbymoviename');
+    return result;
+}catch (error) {
+    return error;
+}
+}
+exports.moviesbyDirector= async function(directorname,sortorder){ //by director
+    try {
+        const pool = await getPool().connect();
+        const result = await pool.request()
+        .input('director', directorname)
+        .input('sortorder', sortorder)
+        .execute('searchbydirector');
+        return result;
+    }catch (error) {
+        return error;
+    }
+}
+exports.moviesbyGenre= async function(genrename,sortorder){ //by genre
+    try {
+        const pool = await getPool().connect();
+        const result = await pool.request()
+        .input('genre', genrename)
+        .input('sortorder', sortorder)
+        .execute('searchbygenre');
+        return result;
+    }catch (error) {
+        return error;
+    }
+}
+exports.moviesbyReleaseYear= async function(year,sortorder){ //by releaseYear
+    try {
+        const pool = await getPool().connect();
+        const result = await pool.request()
+        .input('releaseDate',sql.Int, year)
+        .input('sortorder', sortorder)
+        .execute('searchbyear');
+        return result;
+    }catch (error) {
+        return error;
+    }
 }

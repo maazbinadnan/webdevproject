@@ -14,5 +14,5 @@ const blogPostSchema = new mongoose.Schema({
       required: true
     }
   });
-const wikis = mongoose.model("wikistoapproves", blogPostSchema,"wikistoapproves");
-module.exports = wikis;
+const adminwiki = mongoose.model("wiki", blogPostSchema ,"wiki");
+module.exports = adminwiki;

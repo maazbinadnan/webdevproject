@@ -15,7 +15,7 @@ exports.createtokenemail= async function(email){
 }
 
 
-exports.getpayload = async function(token){
+exports.getpayloadforuser = async function(token){
     try { 
         const decoded = jwt.verify(token, process.env.secretkey); //verify the token
         if (decoded.user == 'cinephile') { //check if the token is for cinephile

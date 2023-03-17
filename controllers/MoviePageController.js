@@ -1,19 +1,20 @@
 const databasecalls = require('../funcsusedbycontrollers/databasecalls.js');
 
-exports.searchmovies=async function(req,res){
-    try {
-        const result = await databasecalls.searchmovies(req.body.moviename);
-        res.json(result.recordsets);    
-    } catch (error) {
-        res.json(error);    
-    }
-    
-}
 
-exports.getmoviepages=async function(req,res){
+exports.getmoviepages=async function(req,res){ //moviepagination with sorting parameters
+    const sortparam = req.query.sortparameter
     try {
-        const result = await databasecalls.getmoviepages(req.query.moviepage||1,10)
+       if(sortparam=='movieName'){
+        const result = await databasecalls.getmoviepages(req.query.moviepage||1,10,sortparam) 
         res.json(result.recordsets);
+    }else if(sortparam=='movieDirector'){
+        const result = await databasecalls.getmoviepages(req.query.moviepage||1,10,sortparam)
+        res.json(result.recordsets);
+    }
+    else{
+        const result = await databasecalls.getmoviepages(req.query.moviepage||1,10,'movieID') //get movie pages depending on the number of entries in the DB and sort
+        res.json(result.recordsets);
+    }
     } catch (error) {
         res.json(error)
     }
@@ -41,7 +42,7 @@ exports.addreview= async function(req,res){
             if (result.rowsAffected[0]==1) {
             res.json({
                 message: "Review added successfully"
-            })
+             })
         } else {
             res.json({
                 message: "Review not added"
@@ -51,3 +52,7 @@ exports.addreview= async function(req,res){
         res.json(error);
     }
 }
+
+
+
+
