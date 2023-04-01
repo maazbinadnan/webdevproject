@@ -51,12 +51,15 @@ exports.getmoviepages= async function(pagenum, pagesize,order){
         return error;
     }
 }
-exports.requestmovie=async function(moviename,moviedirector){
+exports.requestmovie=async function(moviename,moviedirector,overview,genre,releaseDate){
     try {
     const pool = await getPool().connect();
     const result = await pool.request()
     .input('moviename', moviename)
     .input('movieDirector', moviedirector)
+    .input('overview',overview)
+    .input('genre',genre)
+    .input('releaseDate',releaseDate)
     .execute('requestmovie');
     return result;
     } catch (error) {
@@ -117,14 +120,39 @@ exports.moviesbyGenre= async function(genrename,sortorder){ //by genre
     }
 }
 exports.moviesbyReleaseYear= async function(year,sortorder){ //by releaseYear
+    
     try {
         const pool = await getPool().connect();
         const result = await pool.request()
-        .input('releaseDate',sql.Int, year)
+        .input('releaseDate',sql.VarChar, year)
         .input('sortorder', sortorder)
         .execute('searchbyear');
         return result;
     }catch (error) {
         return error;
     }
+}
+exports.moviesbyactor= async function(actorname,sortorder){
+try {
+    const pool = await getPool().connect();
+    const result = await pool.request()
+    .input('ActorName', actorname)
+    .input('SortBy', sortorder)
+    .execute('SearchMoviesbyActor');
+    console.log(result)
+    return result;
+    
+} catch (error) {
+    return error
+}
+}
+exports.gettotalrecords = async function(){
+    try {
+        const pool = await getPool().connect();
+        const result = await pool.request()
+        .query('select count(*) as total from movies')
+        return result.recordset[0].total;
+        } catch (error) {
+            return error;
+        }
 }

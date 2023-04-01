@@ -18,7 +18,7 @@ exports.login = async (req, res) => { //user can only login through email or use
                         redirect: "user redirected to " + req.body.username + "/home" //redirecting user to his home page
                     });                            
                     } else {
-                    res.send("password is incorrect");
+                    res.send("password or username is incorrect");
                     }
                     break;
                 case false: //if username doesnt exist
@@ -31,7 +31,7 @@ exports.login = async (req, res) => { //user can only login through email or use
 
         } else {
             if (register.checkemail(req.body.email)) {
-                switch (await login.checkemaillogin(req.body.email)) {
+                switch (await login.checkemaillogin(req.body.email)) { //if email exists
                     case true:
                         if (await bcrypt.compare(req.body.password, await login.getpasswordfromemail(req.body.email))) {
                             const token = await jwt.createtokenemail(req.body.email) // issue  jwt token
@@ -42,7 +42,7 @@ exports.login = async (req, res) => { //user can only login through email or use
                                 redirect: "user redirected to " + username + "/home"
                             });
                         }else{
-                            res.send("password is incorrect");
+                            res.send("password or email is incorrect");
                         }
                         break;
                     case false:
@@ -50,7 +50,7 @@ exports.login = async (req, res) => { //user can only login through email or use
                         break;
                 }
             } else {
-                res.send("email is not valid");
+                res.send("password or email is incorrect");
                 
             }
         }

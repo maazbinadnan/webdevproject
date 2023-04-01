@@ -1,18 +1,23 @@
 const express=require('express');
-const loginrouter = require('./routers/loginregrouter');
+const loginrouter = require('./routers/loginuserrouter');
 const registerrouter = require('./routers/registerrouter');
 const homerouter = require('./routers/userHomerouter');
+const loginadminrouter = require('./routers/loginadminrouter')
+const adminactionrouter=require('./routers/adminrouter')
 const app=express();
 
 const Bodyparser = require('body-parser');
 app.use(Bodyparser.urlencoded({extended:false}));
 app.use(express.json()); // parse json datas
 app.use('/loginuser', loginrouter); 
-app.use('/registeruser', registerrouter); 
-app.use('/:username',function(req,res,next){
+app.use('/registeruser', registerrouter);
+app.use('/loginadmin',loginadminrouter); 
+app.use('/user/:username',function(req,res,next){
     req.username=req.params.username;
     next();
 } ,homerouter);
+
+app.use('/admin',adminactionrouter);
 const port =3000
 app.listen(port,()=>console.log(`Server started on port ${port}`));
 

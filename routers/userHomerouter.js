@@ -23,25 +23,25 @@ homerouter.use(async function(req,res,next){ //first middleware to check if the 
     }
 })
 
-//login and register
+//change password and email
 homerouter.get("/home" ,HPcontroller.showHpdetails); 
-homerouter.post("/changepassword",HPcontroller.changepassword);
-homerouter.post("/changeemail",HPcontroller.changeemail);
+homerouter.patch("/changepassword",HPcontroller.changepassword);
+homerouter.patch("/changeemail",HPcontroller.changeemail);
 
 //getting all movie pages
-homerouter.get("/allmovies",MovieController.getmoviepages)
+homerouter.get("/movies",MovieController.getmoviepages)
 homerouter.post("/requestmovie",MovieController.requestmovie)
 homerouter.post("/addreview",MovieController.addreview)
 
 //movie searches
-homerouter.post("/moviesearch/name/:moviename",MovieSearchController.searchmovies);
-homerouter.post("/moviesearch/director/:directorname",MovieSearchController.searchmoviebydirector)
-homerouter.post("/moviesearch/genre/:genre",MovieSearchController.searchmoviesbygenre)
-homerouter.post("/moviesearch/year/:year",MovieSearchController.searchmoviesbyyear)
-
+homerouter.get("/moviesearch/name",MovieSearchController.searchmoviesbyname);
+homerouter.get("/moviesearch/director",MovieSearchController.searchmoviebydirector)
+homerouter.get("/moviesearch/genre",MovieSearchController.searchmoviesbygenre)
+homerouter.get("/moviesearch/year",MovieSearchController.searchmoviesbyyear)
+homerouter.get("/moviesearch/actor",MovieSearchController.searchmoviesbyactor)
 //wiki
 homerouter.post("/addwiki",UserwikiController.insertdataintowiki)
 homerouter.get("/wikis",UserwikiController.displayallwikis)
-homerouter.post("/searchwiki",UserwikiController.searchforatopic)
+homerouter.get("/searchwiki",UserwikiController.searchforatopic)
 
 module.exports=homerouter

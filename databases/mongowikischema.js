@@ -5,7 +5,7 @@ const blogPostSchema = new mongoose.Schema({
     title: {type:String, required: true},
     content: {
       type: String,
-      maxlength: 500,
+      maxlength: 1000,
       required: true
     },
     date: {

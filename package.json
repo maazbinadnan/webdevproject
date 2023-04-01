@@ -28,6 +28,6 @@
     "latest-version": "^7.0.0",
     "mongoose": "^7.0.1",
     "mssql": "^9.1.1",
-    "nodemon": "^2.0.21"
+    "nodemon": "^2.0.22"
   }
 }

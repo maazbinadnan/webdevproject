@@ -1,5 +1,7 @@
 const getPool = require('../databases/databaseconfigforuser.js');
 const emailregex=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+const usernameRegex = /^\S+$/;
+
 //usernamelogin function to check if user exists
  exports.checkuserexist = async function(username,email){
     try {
@@ -36,10 +38,8 @@ exports.registeruser= async function(username,email,password){
 }
 
 exports.checkemail= function (email){
-    if(emailregex.test(email)){
-        return true;
-    }else{
-        return false;
-    }
+    return emailregex.test(email)
 }
-
+exports.checkusername= function (username){
+  return usernameRegex.test(username)
+}

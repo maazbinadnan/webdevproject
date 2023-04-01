@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const login = require('../funcsusedbycontrollers/loginfuncs.js');
-const databasecalls = require('../funcsusedbycontrollers/databasecalls.js');
+const databasecalls = require('../funcsusedbycontrollers/USERdatabasecalls.js');
 const emailregex=/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 const jwt = require('jsonwebtoken');
 

@@ -19,6 +19,8 @@ try {
 
 }
 exports.insertdataintowiki = async function(req,res){
+    console.log(req.username)
+    console.log(req.email)
     getconnection();
     const wiki = new wikistoapprove({
         username: req.username,
@@ -33,25 +35,23 @@ exports.insertdataintowiki = async function(req,res){
             res.send("data is waiting for approval")
     }
     }catch(error){
-        res.send("data not inserted")
+        res.send(error)
     }
 }
 
 exports.displayallwikis=async function(req,res){
     getconnection();
-    const result = await wikistoapprove.find();
+    const result = await adminwiki.find();
     res.send(result);
 }
 
 exports.searchforatopic=async function(req,res){
-    const output = {
-        postedby: "",
-    }
+   
     getconnection();
-    const regex = new RegExp(req.body.title, "i"); // "i" makes the search case-insensitive
+    const regex = new RegExp(req.query.title, "i");
+     
     try{
         const results = await adminwiki.find({ title: { $regex: regex } }); //search for a wiki topic
-    
         res.send(results);
     }catch(error){
         res.send("no results found");

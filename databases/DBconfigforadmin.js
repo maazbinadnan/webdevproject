@@ -2,8 +2,8 @@ require("dotenv").config();
 var sql = require('mssql');
 var config = {
     server:'HP-PAVILION-15',
-    user:  process.env.userlogin,
-    password: process.env.userpassword,
+    user: process.env.adminlogin,
+    password:process.env.adminpassword,
     database:'web dev project',
     port:1433,
     options:{
@@ -17,27 +17,20 @@ var config = {
         idleTimeoutMillis:30000        
     }
 };
-
 let pool; 
-getPool = () => {
+getPoolforadmin = () => {
     try {
     
      if (!pool) {
         pool = new sql.ConnectionPool(config);
-        console.log("New connection pool created");
+        console.log("New connection pool created for admin");
         return pool;    
         }else{
-            console.log("Connection pool already exists");
+            console.log("Connection pool already exists for admin");
             return pool;
         }
     } catch (error) {
         console.log(error);
     }
 }
-module.exports = getPool;
-
-
-
-
-
-
+module.exports = getPoolforadmin;

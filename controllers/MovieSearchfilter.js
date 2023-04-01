@@ -1,9 +1,10 @@
-const databasecalls = require('../funcsusedbycontrollers/databasecalls.js');
-//searching for movies 
-exports.searchmoviebydirector=async function(req,res){ //director
+const databasecalls = require('../funcsusedbycontrollers/USERdatabasecalls.js');
+
+// !searching for movies
+ exports.searchmoviebydirector=async function(req,res){ //director
     console.log(req.params.directorname)
     try {
-        const result = await databasecalls.moviesbyDirector(req.params.directorname,req.query.sortorder);
+        const result = await databasecalls.moviesbyDirector(req.query.directorname,req.query.sortorder);
         console.log(result)
         res.json(result.recordsets);    
     } catch (error) {
@@ -12,9 +13,9 @@ exports.searchmoviebydirector=async function(req,res){ //director
     
 }
 
-exports.searchmovies=async function(req,res){ //name
+exports.searchmoviesbyname=async function(req,res){ //name
     try {
-        const result = await databasecalls.searchmovies(req.params.moviename,req.query.sortorder);
+        const result = await databasecalls.searchmovies(req.query.moviename,req.query.sortorder);
         res.json(result.recordsets);    
     } catch (error) {
         res.json(error);    
@@ -25,7 +26,7 @@ exports.searchmovies=async function(req,res){ //name
 exports.searchmoviesbyyear=async function(req,res){ //year
     console.log(req.params.year)
     try {
-        const result = await databasecalls.moviesbyReleaseYear(req.params.year,req.query.sortorder);
+        const result = await databasecalls.moviesbyReleaseYear(req.query.year,req.query.sortorder);
         console.log(result)
         res.json(result.recordsets);    
     } catch (error) {
@@ -37,10 +38,34 @@ exports.searchmoviesbyyear=async function(req,res){ //year
 exports.searchmoviesbygenre=async function(req,res){ //genre
     console.log(req.params.genre)
     try {
-        const result = await databasecalls.moviesbyGenre(req.params.genre,req.query.sortorder);
+        const result = await databasecalls.moviesbyGenre(req.query.genre,req.query.sortorder);
         res.json(result.recordsets);    
     } catch (error) {
         res.json(error);    
     }
     
+}
+
+//searchmoviesbyyear
+exports.searchmoviesbyyear=async function(req,res){ 
+    console.log(req.params.year)
+    try {
+        const result = await databasecalls.moviesbyReleaseYear(req.query.year,req.query.sortorder);
+        console.log(result)
+        res.json(result.recordsets);
+
+}catch(error){
+    res.json(error);
+}
+}
+
+//search by actorname 
+exports.searchmoviesbyactor=async function(req,res){
+    console.log(req.params.actorname)
+    try {
+        const result = await databasecalls.moviesbyactor(req.query.actorname,req.query.sortorder);
+        res.json(result.recordsets);
+    } catch (error) {
+        res.json(error);
+    }
 }
