@@ -1,6 +1,6 @@
 const databasecalls = require('../funcsusedbycontrollers/USERdatabasecalls.js');
 
-// !searching for movies
+
  exports.searchmoviebydirector=async function(req,res){ //director
     console.log(req.params.directorname)
     try {
@@ -16,7 +16,7 @@ const databasecalls = require('../funcsusedbycontrollers/USERdatabasecalls.js');
 exports.searchmoviesbyname=async function(req,res){ //name
     try {
         const result = await databasecalls.searchmovies(req.query.moviename,req.query.sortorder);
-        res.json(result.recordsets);    
+        res.json({result:result.recordsets[0]});    
     } catch (error) {
         res.json(error);    
     }
@@ -67,5 +67,16 @@ exports.searchmoviesbyactor=async function(req,res){
         res.json(result.recordsets);
     } catch (error) {
         res.json(error);
+    }
+}
+
+exports.movieclicked=async function(req,res){
+    console.log(req.params.moviename)
+    console.log(req.username)
+    try {
+        const result = await databasecalls.getSingleMovie(req.params.moviename,req.username)
+        res.json({result:result.recordsets[0]});
+    } catch (error) {
+        res.send(error)
     }
 }

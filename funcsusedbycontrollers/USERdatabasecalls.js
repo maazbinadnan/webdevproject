@@ -40,6 +40,7 @@ exports.getHpDetails = async function(username){
 
 exports.getmoviepages= async function(pagenum, pagesize,order){
     try {
+    console.log(order)    
     const pool = await getPool().connect();
     const result = await pool.request()
     .input('pagenum', pagenum)
@@ -155,4 +156,16 @@ exports.gettotalrecords = async function(){
         } catch (error) {
             return error;
         }
+}
+exports.getSingleMovie=async function(moviename,username){
+    try {
+        const pool = await getPool().connect();
+        const result = await pool.request()
+        .input('MovieName',moviename)
+        .input('username',username)
+        .execute('GetMovieDetailsAndActors')
+        return result;
+    } catch (error) {
+        return error;
+    }
 }

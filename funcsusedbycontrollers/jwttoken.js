@@ -2,15 +2,10 @@ const jwt = require('jsonwebtoken');
 const loginfuncs=require('../funcsusedbycontrollers/loginfuncs.js');
 require('dotenv').config();
 
-exports.createtokenusername= async function(username){
-    const details = await loginfuncs.getdetailsfortoken(username); //get email from database
-    const token = jwt.sign({ email: details.email, username:username, user: 'cinephile'}, process.env.secretkey, { expiresIn: '72h' });    //creates a user token
-    return token;
-}
 
-exports.createtokenemail= async function(email){
-    const details = await loginfuncs.getdetailsfortoken(email); //get email from database
-    const token = jwt.sign({email: email, username: details.username , user: 'cinephile'}, process.env.secretkey, {expiresIn: '72h'});   //creates a user token
+exports.createtoken= async function(email,username){
+     
+    const token = jwt.sign({email: email, username: username , user: 'cinephile'}, process.env.secretkey, {expiresIn: '72h'});   //creates a user token
     return token;
 }
 

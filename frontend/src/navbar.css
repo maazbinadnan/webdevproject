@@ -1,0 +1,64 @@
+
+.home, .movies, .blogs,.reviews {
+  font-family: 'Blackpast Demo', sans-serif;
+  font-size: 23px;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-style: bold;
+  text-align: center;
+}
+
+.home {
+  position: absolute;
+  left: 10%;
+  top: 40%;
+}
+
+.blogs {
+  position: absolute;
+  left: 18%;
+  top: 40%;
+}
+
+.movies {
+  position: absolute;
+  left:26%;
+  top: 40%;
+}
+.reviews{
+  position: absolute;
+  left: 34%;
+  top: 40%;
+}
+
+@media only screen and (max-width: 1080px) {
+  .home, .movies, .blogs,.reviews {
+    position: static;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .home {
+    margin-right:20%;
+    margin-left: 20%;
+  }
+  .blogs {
+    margin-right: 20%;
+    margin-left: 20%;
+  }
+  .movies {
+    margin-right: 20px;
+    margin-left: 20%;
+  }
+  .reviews {
+    margin-right: 20px;
+    margin-left: 20%;
+  }
+}
+.login{
+    position:absolute;
+    right: 10%;
+    top: 20%;
+    font-family: 'Inter';
+    font-style: bold;
+}

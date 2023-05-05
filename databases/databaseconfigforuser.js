@@ -24,7 +24,7 @@ getPool = () => {
     
      if (!pool) {
         pool = new sql.ConnectionPool(config);
-        console.log("New connection pool created");
+        console.log("New connection pool created for SQL");
         return pool;    
         }else{
             console.log("Connection pool already exists");

@@ -2,6 +2,7 @@ const express = require('express');
 const admin = express.Router();
 const adminController=require('../controllers/adminController')
 const jwt = require('../funcsusedbycontrollers/jwttoken.js');
+
 admin.use(async function(req,res,next){ //first middleware to check if the token is valid and username in request matches with the one in token
     try{
     const token = req.headers.authorization.split(" ")[1];

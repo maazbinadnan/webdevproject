@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 async function getconnection(){
 try {
+    console.log("hi")
     const mongoconnection= await mongoose.connect(`mongodb+srv://${process.env.mongousername}:${process.env.mongopassword}@cluster0.ki1sv6q.mongodb.net/CinephileCollective?retryWrites=true&w=majority`)
     if(mongoose.connection.readyState === 1) {
         console.log('Database connected successfully.');
@@ -40,10 +41,14 @@ exports.insertdataintowiki = async function(req,res){
 }
 
 exports.displayallwikis=async function(req,res){
+    console.log("hi")
     getconnection();
     const result = await adminwiki.find();
     res.send(result);
 }
+// exports.displayallwikis= async function(req,res){
+// console.log("hi")
+// }
 
 exports.searchforatopic=async function(req,res){
    
@@ -56,7 +61,4 @@ exports.searchforatopic=async function(req,res){
     }catch(error){
         res.send("no results found");
     }
-
-    
-    
 }

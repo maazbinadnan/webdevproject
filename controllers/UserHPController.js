@@ -11,7 +11,7 @@ exports.showHpdetails = async function(req,res){
       message: "no movies added yet"
     })
   } else {
-    res.json(details.recordsets);
+    res.json({result: details.recordsets[0]});
   }
   
 }
@@ -19,7 +19,7 @@ exports.showHpdetails = async function(req,res){
 // user home page controller
 exports.changepassword = async function(req,res){
     const newhashedpass= await bcrypt.hash(req.body.newpassword, 10);
-  if (await bcrypt.compare(req.body.oldpassword, await login.getpasswordfromusername(req.username))) { // if old password is correct
+  if (await bcrypt.compare(req.body.oldpassword, await login.getuserpassword(req.username))) { // if old password is correct
 
     if (await databasecalls.updatepassword(req.username,newhashedpass)) {
         res.send("password changed successfully")

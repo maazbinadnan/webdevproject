@@ -1,0 +1,97 @@
+@font-face {
+  font-family: 'Blackpast Demo';
+  src: url('../Blackpast\ DEMO.ttf');
+  font-weight: 900;
+  font-style: normal;
+  /* font-display: swap; */
+}
+
+
+
+.heading {
+  font-family: 'Blackpast Demo', sans-serif;
+  margin-top: 3vh;
+  color:wheat;
+  font-size: 500%;
+  text-align: center;
+
+}
+
+
+
+.divcenter {
+  position: relative;
+  display: flex;
+  background-image: url('../background-final-min.jpg');
+  background-size: cover;
+  background-position: center center;
+  justify-content: center;  
+  align-items: top center;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+}
+
+
+
+.text {
+  position: absolute;
+  width: 50%;
+  height: 35vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+  color: wheat;
+}
+
+
+
+.LoginPaper {
+  position: absolute;
+  left: 32.5%;
+  right: 32.5%;
+  top: 35.76%;
+  bottom: 20.76%;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+
+}
+
+
+.usernameoremail {
+  top: 20%;
+  position: absolute;
+  width: 50%;
+
+
+}
+
+.password {
+  top: 25%;
+  position: absolute;
+  width: 50%;
+}
+
+.loginbutton {
+  top: 30%;
+  position: absolute;
+  width: 20%;
+}
+.loginheading{
+  top: 5%;
+  position: absolute;
+  font-size: 20px;
+  color: wheat;
+  font-family: 'Inter';
+}

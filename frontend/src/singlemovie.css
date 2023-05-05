@@ -1,0 +1,133 @@
+.moviedetails {
+    position: absolute;
+
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 70%;
+}
+
+.movietitle {
+    position: absolute;
+    position: absolute;
+    left: 37.57%;
+    right: 21.85%;
+    top: 7.76%;
+    bottom: 79.64%;
+
+
+}
+
+.image {
+    position: absolute;
+    left: 4.51%;
+    right: 67.69%;
+    top: 7.76%;
+    bottom: 7.76%;
+    border: solid grey;
+}
+
+.moviedesc {
+    position: absolute;
+    left: 37.57%;
+    right: 33.41%;
+    top: 25.19%;
+    bottom: 38.8%;
+
+
+}
+
+.actors {
+    position: absolute;
+    left: 37.69%;
+    right: 33.41%;
+    top: 68.45%;
+    bottom: 27.35%;
+
+
+}
+
+.director {
+    position: absolute;
+    left: 37.69%;
+    right: 33.41%;
+    top: 79.9%;
+    bottom: 15.9%;
+
+
+}
+
+.releasedate {
+
+    position: absolute;
+    left: 37.69%;
+    right: 33.41%;
+    top: 85.62%;
+    bottom: 10.18%;
+}
+
+.genre {
+    position: absolute;
+    left: 37.69%;
+    right: 33.41%;
+    top: 74.17%;
+    bottom: 21.63%;
+}
+
+.review {
+    position: absolute;
+    left: 70%;
+    right: 3.06%;
+    top: 20%;
+    bottom: 38.8%;
+    height: 70%;
+    width: 25%;
+}
+
+.reviewtext {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    bottom: 20%;
+
+}
+
+.rating {
+    position: absolute;
+    top: 5%;
+    width: 100%;
+}
+
+.logmovie {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    left: 30%;
+    top: 80%;
+    width:auto;
+}
+.postmovie{
+    position: relative;
+    
+    width: 100vw;
+    height: 100vh;
+
+}
+.paper{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* background-color: white; */
+}
+.submitreview{
+    position: absolute;
+    left: 40%;
+    top: 80%;
+    cursor: pointer;    
+}
+.newrating{
+    position: absolute;
+    left: 33%;
+    top: 65%;
+    cursor: pointer;    
+}

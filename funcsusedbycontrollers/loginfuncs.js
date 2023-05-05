@@ -42,24 +42,13 @@ exports.checkemaillogin = async function(email){
         return err;
       }
 }
-exports.getpasswordfromemail = async function(email){
-  try {
-      const pool = await getPool().connect();
-      const result = await pool.request()
-      .input('email', email)
-      .execute('getpasswordfromemail');
-      return result.recordset[0].password;
-  } catch (error) {
-      return error;
-  }
-}
 
-exports.getpasswordfromusername = async function(username){
+exports.getuserpassword = async function(userinput){
 try {
     const pool = await getPool().connect();
     const result = await pool.request()
-    .input('username', username)
-    .execute('getpasswordfromusername');
+    .input('input', userinput)
+    .execute('getuserpassword');
     return result.recordset[0].password;
 } catch (error) {
     return error;
@@ -85,5 +74,17 @@ exports.getusernamefromemail = async function(email){
       return result.recordset[0].username;
   } catch (error) {
       return error;
+  }
+}
+
+exports.checkuserexistence=async function(userinput){
+  try {
+    const pool = await getPool().connect();
+    const result = await pool.request()
+    .input('input', userinput)
+    .execute('checkuserexistence');
+    return result.recordset;
+  } catch (error) {
+    return error
   }
 }

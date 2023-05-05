@@ -5,28 +5,37 @@ exports.getmoviepages=async function(req,res){ //moviepagination with sorting pa
     const totalrecords = await databasecalls.gettotalrecords()
     console.log(totalrecords)
     const sortparam = req.query.sortby
+    console.log(sortparam)
     try {
        if(sortparam=='movieName'){
-        const result = await databasecalls.getmoviepages(req.query.moviepage||1,10,sortparam) 
-        res.json({
-            pagenumber: req.euery.moviepage,
-            totalrecords: totalrecords,
-            result: result.recordsets});
-        
-    }else if(sortparam=='movieDirector'){
-        const result = await databasecalls.getmoviepages(req.query.moviepage||1,10,sortparam)
+        const result = await databasecalls.getmoviepages(req.query.moviepage||1,24,sortparam) 
+
         res.json({
             pagenumber: req.query.moviepage,
             totalrecords: totalrecords,
-            result: result.recordsets});
+            result: result.recordsets[0]});
+           
+        
+    }else if(sortparam=='movieDirector'){
+        const result = await databasecalls.getmoviepages(req.query.moviepage||1,24,sortparam)
+        res.json({
+            pagenumber: req.query.moviepage,
+            totalrecords: totalrecords,
+            result: result.recordsets[0]});
+    }else if(sortparam=='releaseDate'){
+        const result = await databasecalls.getmoviepages(req.query.moviepage||1,24,sortparam)
+        res.json({
+            pagenumber: req.query.moviepage,
+            totalrecords: totalrecords,
+            result: result.recordsets[0]});
     }
     else{
-        const result = await databasecalls.getmoviepages(req.query.moviepage||1,10,'movieID') //get movie pages depending on the number of entries in the DB and sort
+        const result = await databasecalls.getmoviepages(req.query.moviepage||1,24,'movieID') //get movie pages depending on the number of entries in the DB and sort
  
         res.json({
             pagenumber: req.query.moviepage,
             totalrecords: totalrecords,
-            result: result.recordsets});
+            result: result.recordsets[0]});
     }
     } catch (error) {
         res.json(error)
@@ -41,7 +50,7 @@ exports.requestmovie=async function(req,res){
             
             res.json("Movie request sent");
         }else if(result.recordset[0].requested==1){
-            res.json("Movie already requested and will be added soon");
+            res.json("Movie already requested and will be added soon"); 
         }else{
             res.json("Movie already exists in database");
         }
