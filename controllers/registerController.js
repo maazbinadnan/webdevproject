@@ -13,7 +13,7 @@ exports.registeruser = async (req, res) => {
      else if (register.checkemail(req.body.email) && await register.checkuserexist(req.body.username,req.body.email) && register.checkusername(req.body.username)) { //if both correct check if userexists already otherwise register user
         const hashedpassword = await bcrypt.hash(req.body.password, 10); //hash password
         const result = await register.registeruser(req.body.username,req.body.email,hashedpassword); //store password and register user
-        const token = await jwt.createtokenemail(req.body.email);//create a token 
+        const token = await jwt.createtoken(req.body.email,req.body.username);//create a token 
         console.log(result);
         res.json({
             token: token,

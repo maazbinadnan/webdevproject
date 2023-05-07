@@ -1,12 +1,61 @@
 import React, { useEffect, useState } from "react";
 import "./movies.css";
 import { Navbar } from "./navigationbar";
-import { Link, useNavigate, } from "react-router-dom";
-import { Grid, ToggleButtonGroup, ToggleButton } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Grid, ToggleButtonGroup, ToggleButton, Select, FormControl, InputLabel, MenuItem } from "@mui/material";
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import axios from "axios";
+const genres = [
 
+  'Action',
+  'Adventure',
+  'Animation',
+  'Comedy',
+  'Crime',
+  'Drama',
+  'Music',
+  'Fantasy',
+  'Musical',
+  'Mystery',
+  'Romance',
+  'Sci-Fi',
+  'Thriller',
+  'War',
+]
+function Pagelist({ count, pagechange }) {
+  return (
+    <div className="pagination">
+      <Stack spacing={2}>
+        <Pagination count={count} sx={{ backgroundColor: 'white', color: 'aqua' }} onChange={pagechange} />
+      </Stack>
 
+    </div>
+  )
+}
 
+function Genredropdown({ genre, handlegenreselect }) {
+  return (
+    <div className="genredropdown">
+      <FormControl fullWidth>
+        <InputLabel>Genre</InputLabel>
+        <Select
+          value={genre}
+          onChange={handlegenreselect}
+        >
+          {genres.map((genre) => (
+            <MenuItem value={genre}>
+              {genre}
+            </MenuItem>
+          ))}
+          <MenuItem value={null}>
+            none
+          </MenuItem>
+        </Select>
+      </FormControl>
+    </div>
+  )
+}
 function Renderimages({ movies }) {
 
   if (!movies) {
@@ -28,22 +77,41 @@ function Renderimages({ movies }) {
   );
 }
 export function Movies() {
-  const navigate =useNavigate();
   const [movies, setMovies] = React.useState([]);
   const [sortby, setSortby] = React.useState('');
+  const [count, setCount] = React.useState(1);
+  const [currentpage, Setcurrentpage] = useState(1);
+  //handle genre
+  const [genre, setGenre] = React.useState('');
+  const handlegenreselect = (event) => {
+    setGenre(event.target.value);
+  };
+
+
+  const handlePageChange = (event, value) => {
+    Setcurrentpage(value);
+  };
+
   //    * handle movies function 
   //    */
   const token = localStorage.getItem('token')
   if (!token) {
-    navigate('/login')
+    window.location.assign('/login')
   }
-    useEffect(() => {
+  useEffect(() => {
     console.log(token)
     console.log(sortby)
+    
+    let url = `http://localhost:5000/user/movies?moviepage=${currentpage}&sortby=${sortby}`;
+    
+    if (genre) {
+      url += `&genre=${genre}`;
+    }
+
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: `http://localhost:5000/user/movies?moviepage=1&sortby=${sortby}`,
+      url: url,
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -51,14 +119,18 @@ export function Movies() {
 
     axios.request(config)
       .then((response) => {
+        console.log(url)
         console.log(response.data)
+        console.log(response.data.totalrecords)
+        setCount(Math.ceil(response.data.totalrecords/24))
+        console.log(count)
         setMovies(response.data.result);
 
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [token, sortby])
+  }, [sortby, currentpage, genre])
 
   return (
     <div className="background" >
@@ -80,10 +152,14 @@ export function Movies() {
           <ToggleButton value="" sx={{ bgcolor: sortby === "" ? 'black' : '#f8f4e3', color: sortby === "" ? 'white' : 'inherit' }}>
             Default
           </ToggleButton>
-          </ToggleButtonGroup>
+        </ToggleButtonGroup>
       </div>
       <Renderimages movies={movies}></Renderimages>
       <Navbar />
+      <Pagelist count={count} pagechange={handlePageChange}>
+      
+      </Pagelist>
+      <Genredropdown genre={genre} handlegenreselect={handlegenreselect} />
     </div>
   )
 }

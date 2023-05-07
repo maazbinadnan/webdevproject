@@ -45,7 +45,7 @@ export function Login() {
     axios.request(config)
     .then((response) => {
       localStorage.setItem('token',response.data.token)
-      navigate('/movies')
+      window.location.assign('/movies')
     })
     .catch((error) => {
       console.log(error);
@@ -56,7 +56,7 @@ export function Login() {
 
   return (
     <div className='divcenter'>
-      <h1 className='heading'>The Cinephile Collective </h1>
+      <h1 className='Title'>The Cinephile Collective </h1>
       <p className='text'>Join us on a journey of film appreciation and explore the art of Cinema! </p>
 
       <form onSubmit={handlelogin}>
@@ -72,7 +72,7 @@ export function Login() {
             onChange={userdetailsset}
             value={email} /> {/* added to bind email input value to state */}
 
-          <TextField className='password'
+          <TextField className='passwordlogin'
             sx={{ backgroundColor: 'white', fontSize:'1 px'}}
             label="Password"
             variant="filled"

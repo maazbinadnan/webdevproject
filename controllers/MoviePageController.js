@@ -1,14 +1,18 @@
 const databasecalls = require('../funcsusedbycontrollers/USERdatabasecalls.js');
 
 
-exports.getmoviepages=async function(req,res){ //moviepagination with sorting parameters
-    const totalrecords = await databasecalls.gettotalrecords()
+exports.getmoviepages=async function(req,res){
+     //moviepagination with sorting parameters
+    if (req.query.genre=='') {
+        req.query.genre=null
+    } 
+    const totalrecords = await databasecalls.gettotalrecords(req.query.genre)
     console.log(totalrecords)
     const sortparam = req.query.sortby
     console.log(sortparam)
     try {
        if(sortparam=='movieName'){
-        const result = await databasecalls.getmoviepages(req.query.moviepage||1,24,sortparam) 
+        const result = await databasecalls.getmoviepages(req.query.moviepage||1,24,sortparam,req.query.genre) 
 
         res.json({
             pagenumber: req.query.moviepage,
@@ -17,20 +21,20 @@ exports.getmoviepages=async function(req,res){ //moviepagination with sorting pa
            
         
     }else if(sortparam=='movieDirector'){
-        const result = await databasecalls.getmoviepages(req.query.moviepage||1,24,sortparam)
+        const result = await databasecalls.getmoviepages(req.query.moviepage||1,24,sortparam,req.query.genre)
         res.json({
             pagenumber: req.query.moviepage,
             totalrecords: totalrecords,
             result: result.recordsets[0]});
     }else if(sortparam=='releaseDate'){
-        const result = await databasecalls.getmoviepages(req.query.moviepage||1,24,sortparam)
+        const result = await databasecalls.getmoviepages(req.query.moviepage||1,24,sortparam,req.query.genre)
         res.json({
             pagenumber: req.query.moviepage,
             totalrecords: totalrecords,
             result: result.recordsets[0]});
     }
     else{
-        const result = await databasecalls.getmoviepages(req.query.moviepage||1,24,'movieID') //get movie pages depending on the number of entries in the DB and sort
+        const result = await databasecalls.getmoviepages(req.query.moviepage||1,24,'movieID',req.query.genre) //get movie pages depending on the number of entries in the DB and sort
  
         res.json({
             pagenumber: req.query.moviepage,

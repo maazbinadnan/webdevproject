@@ -1,0 +1,82 @@
+.body {
+    position: absolute;
+    background-color: #f8f4e3;
+    height: 100vh;
+    left: 50%;
+    width: 50%;
+}
+
+.heading {
+    font-family: 'Blackpast Demo', sans-serif;
+    margin-top: 3vh;
+    left: 40%;
+    color: black;
+    font-size: 400%;
+    text-align: center;
+}
+
+.form {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 60%;
+    background-color: #1E1F1F;
+    border-radius: 10px;
+}
+
+.email {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    width: 80%;
+    height: 10%;
+    font-size: 150%;
+}
+
+.username {
+    position: absolute;
+    top: 25%;
+    left: 10%;
+    width: 80%;
+    height: 10%;
+    font-size: 150%;
+}
+
+.passwordsignup {
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    width: 80%;
+    height: 10%;
+    font-size: 150%;
+
+}
+
+.re-enterpassword {
+    position: absolute;
+    top: 35%;
+    left: 10%;
+    width: 80%;
+    height: 10%;
+    font-size: 150%;
+}
+
+.signupbutton {
+    position: absolute;
+    top: 40%;
+    left: 35%;
+    width: 80%;
+    height: 10%;
+    font-size: 100%;
+
+    
+}
+.randomimages{
+    position: absolute;
+    top: 0%;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    
+}

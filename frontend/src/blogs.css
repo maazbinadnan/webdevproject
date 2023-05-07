@@ -1,0 +1,15 @@
+.grid{
+    position: absolute;
+    top: 60%;
+    width: 80%;
+    left: 10%;
+}
+.featurepost{
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    height: 35%;
+    width: 80%;
+    
+    
+}

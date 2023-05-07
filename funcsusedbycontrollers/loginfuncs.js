@@ -82,7 +82,7 @@ exports.checkuserexistence=async function(userinput){
     const pool = await getPool().connect();
     const result = await pool.request()
     .input('input', userinput)
-    .execute('checkuserexistence');
+    .execute('checkuserlogin');
     return result.recordset;
   } catch (error) {
     return error

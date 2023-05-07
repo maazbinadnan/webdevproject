@@ -10,9 +10,10 @@ const usernameRegex = /^\S+$/;
           .input('username', username)
           .input('email', email)
           .execute('checkuserexistence');
-      
+          console.log(result)
         if (result.recordset[0].usernum > 0) {
           // User already exists
+          
           return false;
         } else {
           // No user found
@@ -20,6 +21,7 @@ const usernameRegex = /^\S+$/;
         }
       } catch (err) {
         // Handle error
+        console.log(err);
         return err;
       }
 }

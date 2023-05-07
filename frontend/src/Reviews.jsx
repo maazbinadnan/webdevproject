@@ -32,10 +32,7 @@ export function Reviews() {
   
   //    * handle movies function 
   //    */
-  const token = localStorage.getItem('token')
-  if (!token) {
-    navigate('/login')
-  }
+    const token = localStorage.getItem('token')
     useEffect(() => {
     console.log(token)
     let config = {

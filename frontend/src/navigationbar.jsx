@@ -76,7 +76,7 @@ export function Navbar() {
                         </Link>
                     </div>
                     <div>
-                        <Link className="blogs">
+                        <Link className="blogs" to={'/blogs'}>
                             Blogs
                         </Link>
                     </div>
@@ -109,4 +109,3 @@ export function Navbar() {
         </div>
     )
 }
-//href="http://localhost:3000/login"

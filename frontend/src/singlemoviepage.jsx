@@ -2,12 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./singlemovie.css"
 import { Navbar } from "./navigationbar";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Backdrop, Button, Paper, Rating, TextField } from "@mui/material";
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
 
 function ReviewMovie({ movie, onclose}) {
-  const [rating, Setrating] = useState(3)
+  const [rating, Setrating] = useState(movie[0].Rating)
   const [review, Setreview] =useState(movie[0].Review)
   const token = localStorage.getItem('token')
   let data = {
@@ -186,10 +186,13 @@ function DisplayMoviePoster({ movie }) {
 export function Singlemovie() {
   const { moviename } = useParams()
   const [movie, setMovie] = useState(null);
+  const token = localStorage.getItem('token')
+  if (!token) {
+    window.location.assign('/login')
+  }
   useEffect(() => {
-    console.log(moviename)
-    console.log(`http://localhost:5000/user/movie/${moviename}`)
-    const token = localStorage.getItem('token')
+  
+    
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
