@@ -19,6 +19,7 @@ admin.post("/addactor",adminController.insertactor)
 admin.delete("/users/:username",adminController.deleteuser)
 admin.get("/movierequests",adminController.movierequests)
 admin.get("/wikistoapprove",adminController.getallwikistoapprove)
+admin.get("/allwikis",adminController.getallwikis)
 admin.post("/wiki",adminController.postwiki)
-admin.delete("/wiki/:title/:username",adminController.deletewiki)
+admin.delete("/wiki/:_id",adminController.deletewiki)
 module.exports = admin

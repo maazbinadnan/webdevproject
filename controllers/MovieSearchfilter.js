@@ -71,10 +71,10 @@ exports.searchmoviesbyactor=async function(req,res){
 }
 
 exports.movieclicked=async function(req,res){
-    console.log(req.params.moviename)
+    console.log(req.params.imdbID)
     console.log(req.username)
     try {
-        const result = await databasecalls.getSingleMovie(req.params.moviename,req.username)
+        const result = await databasecalls.getSingleMovie(req.params.imdbID,req.username)
         res.json({result:result.recordsets[0]});
     } catch (error) {
         res.send(error)

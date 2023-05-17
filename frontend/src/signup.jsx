@@ -136,7 +136,7 @@ export default function Signup() {
                             color='secondary'
                             size='small'
                             required
-                            error={error==1}
+                            error={error===1}
                             helperText={emailError ? emailError : null}
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -149,7 +149,7 @@ export default function Signup() {
                             color='secondary'
                             size='small'
                             required
-                            error={error==2}
+                            error={error===2}
                             helperText={usernameError ? usernameError : null}
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
@@ -163,7 +163,7 @@ export default function Signup() {
                             size='small'
                             type="password"
                             required
-                            error={error==3}
+                            error={error===3}
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
@@ -176,7 +176,7 @@ export default function Signup() {
                             size='small'
                             type="password"
                             required
-                            error={error==4}
+                            error={error===4}
                             value={reEnterPassword}
                             onChange={(e) => setReEnterPassword(e.target.value)}
                         />

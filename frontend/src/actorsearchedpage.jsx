@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./Images.css";
 import { Navbar } from "./navigationbar";
 import { Link, useLocation, } from "react-router-dom";
-import { Grid,Rating } from "@mui/material";
+import { Grid } from "@mui/material";
 import axios from "axios";
-import StarBorderIcon from '@mui/icons-material/StarBorder';
-
 function Renderimages({ result }) {
 
   if (!result) {
@@ -15,26 +13,11 @@ function Renderimages({ result }) {
   return (
     <div className="imagelist" style={{ display: "flex", flexDirection: "column" }}>
       <Grid container sx={{ height: '100%', width: '100%' }}>
-        {result.map((movie) => (
-          <Grid item key={movie.imdbID} xs={4} md={1.5} sx={{ margin: 0 }}>\
-            <Link to={`/singlemovie/${movie.imdbID}`}>
-              <img src={`${movie.photourl}`} alt={movie.imdbID} title={movie.imdbID} className="images" />
+        {result.map((actor) => (
+          <Grid item key={actor.imdbID} xs={4} md={1.5} sx={{ margin: 0 }}>\
+            <Link to={`/actor/${actor.imdbID}`}>
+              <img src={`${actor.photourl}`} alt={actor.actorname} title={actor.actorname} className="images" />
             </Link>
-            <Rating
-              size="medium"
-              readOnly
-              value={movie.avgRating}
-              precision={0.5}
-              sx={{
-                '& .MuiRating-iconFilled': {
-                  color: '#d5b942',
-                },
-                '& .MuiRating-iconEmpty': {
-                  borderColor: 'white',
-                },
-              }}
-              emptyIcon={<StarBorderIcon style={{ color:'white' }} />}
-            />
           </Grid>
         ))}
         
@@ -51,9 +34,9 @@ function Renderimages({ result }) {
   );
 
 }
-export function  Moviesearched() {
+export function Actorsearched() {
   const location = useLocation();
-  const moviename = new URLSearchParams(location.search).get("moviename");
+  const actorname = new URLSearchParams(location.search).get("actorname");
   const [searchresult, setresult] = React.useState('')
   const [sortby, setSortby] = React.useState('');
 
@@ -68,7 +51,7 @@ export function  Moviesearched() {
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: `http://localhost:5000/user/moviename?moviename=${moviename}`,
+      url: `http://localhost:5000/user/actor/name?actorname=${actorname}`,
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -85,7 +68,7 @@ export function  Moviesearched() {
       });
     //calling actors
 
-  }, [token, sortby, moviename])
+  }, [token, sortby, actorname])
 
   return (
     <div className="background" >
@@ -94,7 +77,7 @@ export function  Moviesearched() {
       </div>
       <p style={{
         position: 'absolute', top: '12.5%', left: '8.8%', right: '8.65%', fontSize: '20px', color: 'white', fontWeight: 'bold', fontFamily: 'Blackpast Demo'
-      }}>All Results with "{`${moviename}`}"</p>
+      }}>All Actors with "{`${actorname}`}"</p>
       <Renderimages result={searchresult}></Renderimages>
       <Navbar />
     </div>

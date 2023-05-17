@@ -1,0 +1,25 @@
+.actorposter{
+    position: absolute;
+    left: 0%;
+
+    top: 7.76%;
+    bottom: 7.76%;
+    border: 3px solid #9612dd;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover{
+        transform: scale(1.05);
+        z-index: 1;
+    }
+    background-color: aliceblue;
+}
+.actordetails{
+    position: absolute;
+
+    top: 10%;
+    left: 10%;
+    width: 80%;
+    height: 70%;    
+}

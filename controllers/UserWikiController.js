@@ -41,7 +41,7 @@ exports.insertdataintowiki = async function(req,res){
 }
 
 exports.displayallwikis=async function(req,res){
-    console.log("hi")
+    
     getconnection();
     const result = await adminwiki.find();
     res.send(result);

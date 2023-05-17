@@ -22,12 +22,12 @@ exports.changepassword = async function(req,res){
   if (await bcrypt.compare(req.body.oldpassword, await login.getuserpassword(req.username))) { // if old password is correct
 
     if (await databasecalls.updatepassword(req.username,newhashedpass)) {
-        res.send("password changed successfully")
+        res.json({message:"password changed successfully"})
     } else {
-        res.send("error changing password")
+        res.json({message:"error changing password"})
     }
   }  else {
-    res.send("old password is incorrect");
+    res.json({message:"password is incorrect"});
   }
 
 }
@@ -44,10 +44,10 @@ exports.changeemail = async function(req,res){
       });
     } else {
       res.json({ //if email not changed in database
-        message: "email already exists in database"
+        message: "user with email already exists"
       });
     }
 }else{
-    res.send("email format is not valid");
+    res.json({message:"email format is not valid"});
 }
 }

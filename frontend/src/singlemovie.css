@@ -5,12 +5,13 @@
     left: 10%;
     width: 80%;
     height: 70%;
+
 }
 
 .movietitle {
     position: absolute;
     position: absolute;
-    left: 37.57%;
+    left: 30%;
     right: 21.85%;
     top: 7.76%;
     bottom: 79.64%;
@@ -20,16 +21,16 @@
 
 .image {
     position: absolute;
-    left: 4.51%;
-    right: 67.69%;
+    left: 0%;
+
     top: 7.76%;
     bottom: 7.76%;
-    border: solid grey;
+    border: 3px solid #9612dd;
 }
 
 .moviedesc {
     position: absolute;
-    left: 37.57%;
+    left: 30%;
     right: 33.41%;
     top: 25.19%;
     bottom: 38.8%;
@@ -37,22 +38,22 @@
 
 }
 
-.actors {
+.actorsinmovie {
     position: absolute;
-    left: 37.69%;
+    left: 30%;
     right: 33.41%;
-    top: 68.45%;
-    bottom: 27.35%;
+    top: 63%;
+    bottom: 20%;
 
 
 }
 
 .director {
     position: absolute;
-    left: 37.69%;
+    left: 30%;
     right: 33.41%;
     top: 79.9%;
-    bottom: 15.9%;
+
 
 
 }
@@ -60,18 +61,18 @@
 .releasedate {
 
     position: absolute;
-    left: 37.69%;
+    left: 30%;
     right: 33.41%;
     top: 85.62%;
-    bottom: 10.18%;
+
 }
 
 .genre {
     position: absolute;
-    left: 37.69%;
+    left: 30%;
     right: 33.41%;
-    top: 74.17%;
-    bottom: 21.63%;
+    top: 74%;
+
 }
 
 .review {
@@ -104,30 +105,69 @@
     align-items: center;
     left: 30%;
     top: 80%;
-    width:auto;
+    width: auto;
 }
-.postmovie{
+
+.postmoviereview {
     position: relative;
-    
     width: 100vw;
     height: 100vh;
 
 }
-.paper{
+
+.paper {
     position: absolute;
     width: 100%;
     height: 100%;
     /* background-color: white; */
 }
-.submitreview{
+
+.submitreview {
     position: absolute;
     left: 40%;
     top: 80%;
-    cursor: pointer;    
+    cursor: pointer;
 }
-.newrating{
+
+.newrating {
     position: absolute;
     left: 33%;
     top: 65%;
-    cursor: pointer;    
+    cursor: pointer;
+}
+
+.actorimagediv {
+    position: absolute;
+    left: 0%;
+    top: 500%;
+    width: 80%;
+    height: 20%;
+
+
+
+}
+
+.actoridentifier {
+
+    width: 140px;
+    height: 192px;
+    border: 3px solid #9612dd;
+    object-fit: cover;
+
+}
+.moviesactedin{
+    position: absolute;
+    left: 20%;
+    top: 40%;
+    width: 30%;
+    height: 10%;
+    border: 3px solid #9612dd;
+    object-fit: cover;
+}
+.singlemovieidentifier{
+    
+    width: 140px;
+    height: 192px;
+    border: 3px solid #9612dd;
+    object-fit: cover;
 }

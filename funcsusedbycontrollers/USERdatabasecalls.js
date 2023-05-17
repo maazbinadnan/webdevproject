@@ -48,8 +48,10 @@ exports.getmoviepages = async function (pagenum, pagesize, order, genre) {
             .input('order', order)
             .input('genre', genre)
             .execute('moviepagination');
+            console.log(result )
         return result;
     } catch (error) {
+        console.log(error)
         return error;
     }
 }
@@ -172,15 +174,63 @@ exports.gettotalrecords = async function (genre) {
 }
 
 
-exports.getSingleMovie = async function (moviename, username) {
+exports.getSingleMovie = async function (IMDBID, username) {
     try {
         const pool = await getPool().connect();
         const result = await pool.request()
-            .input('MovieName', moviename)
+            .input('IMDBID', IMDBID)
             .input('username', username)
             .execute('GetMovieDetailsAndActors')
         return result;
     } catch (error) {
+        return error;
+    }
+}
+//actors
+exports.searchactorname = async function (actorname) {
+    try {
+        const pool = await getPool().connect();
+        const result = await pool.request()
+            .input('actorname', actorname)
+            .execute('getActors')
+            console.log(result)
+        return result;
+    } catch (error) {
+        console.log(error)
+        return error;
+    }
+}
+exports.getsingleactor = async function (imdbID) {
+    try {
+        const pool = await getPool().connect();
+        const result = await pool.request()
+            .input('imdbID', imdbID)
+            .execute('getSingleActorDetails')
+        return result;
+    } catch (error) {
+        return error;
+    }
+}
+exports.actorpagination = async function (pagesize, pagenumber) {
+
+    try {
+        const pool = await getPool().connect();
+        const result = await pool.request()
+            .input('pageSize', pagesize)
+            .input('pageNumber', pagenumber)
+            .execute('getallActors')
+        return result;
+    } catch (error) {
+        return error;
+    }
+}
+exports.getTotalactors= async function(){
+    try {
+        const pool = await getPool().connect();
+        const result = await pool.request()
+        .query('select count(*) as total from actors')
+        return result;
+    }catch(error){
         return error;
     }
 }

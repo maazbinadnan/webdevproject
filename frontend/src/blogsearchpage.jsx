@@ -3,10 +3,10 @@ import { Grid, Card, CardContent, Typography, CardMedia, Button } from '@mui/mat
 import './blogs.css'
 import { Navbar } from './navigationbar';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 
-function Deletwiki({ token, wikid }) {
+function Deletwiki({ token,wikid}) {
   const handleclick = () => {
     let config = {
       method: 'delete',
@@ -33,7 +33,9 @@ function Deletwiki({ token, wikid }) {
   )
 }
 
-export default function FeaturedPost() {
+export default function SearchPost() {
+    const location = useLocation();
+  const title = new URLSearchParams(location.search).get("title");  
   const [posts, setPosts] = React.useState([]);
   const [admin, Setadmin] = React.useState(false)
   const [loading, setLoading] = React.useState(true);
@@ -70,7 +72,7 @@ export default function FeaturedPost() {
       let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: 'http://localhost:5000/user/wikis',
+        url: `http://localhost:5000/user/searchwiki?title=${title}`,
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -97,25 +99,12 @@ export default function FeaturedPost() {
 
   return (
     <div>
-      <div style={{ position: 'absolute', height: '1.5px', top: '19%', backgroundColor: 'white', left: '8.8%', right: '8.65%' }}>
-
-      </div>
-      <p style={{
-        position: 'absolute', top: '12.5%', left: '8.8%', right: '8.65%', fontSize: '20px', color: 'white', fontWeight: 'bold', fontFamily: 'Blackpast Demo'
-      }}>All Posts</p>
       <Navbar />
       <div className='grid'>
         <Grid container spacing={2}>
           {posts.map((post, index) => (
             <Grid key={index} item xs={12} sm={6} md={4}>
-              <Card sx={{
-
-                '&:hover': {
-                  transform: 'scale(1.05)',
-                  zIndex: 1,
-                }
-              }}>
-
+              <Card>
                 <CardContent>
                   <Typography variant="h5" component="h2">
                     <b> {post.title}</b>
@@ -130,7 +119,7 @@ export default function FeaturedPost() {
               </Card>
               {admin && (
                 <div>
-                  <Deletwiki token={token} wikid={post._id} />
+                  <Deletwiki  token={token} wikid={post._id}/>
                 </div>
               )}
             </Grid>
@@ -138,6 +127,6 @@ export default function FeaturedPost() {
           ))}
         </Grid>
       </div>
-    </div >
+    </div>
   );
 }

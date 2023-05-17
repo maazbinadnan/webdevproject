@@ -5,13 +5,13 @@ const HPcontroller = require('../controllers/UserHPController');
 const MovieController = require('../controllers/MoviePageController');
 const MovieSearchController = require('../controllers/MovieSearchfilter')
 const UserwikiController = require('../controllers/UserWikiController')
-
+const ActorController = require('../controllers/actorController.js')
 homerouter.use(async function(req,res,next){ //first middleware to check if the token is valid and username in request matches with the one in token
     try{
     const token = req.headers.authorization.split(" ")[1];
     decodedtoken = await jwt.getpayloadforuser(token);
     console.log(decodedtoken.username); 
-    if (decodedtoken.user == 'cinephile') { //check if the token is for cinephile
+    if (decodedtoken.user == 'cinephile' ) { //check if the token is for cinephile
         req.username=decodedtoken.username
         req.email=decodedtoken.email
         next(); 
@@ -38,11 +38,14 @@ homerouter.get("/moviedirector",MovieSearchController.searchmoviebydirector)
 homerouter.get("/moviegenre",MovieSearchController.searchmoviesbygenre)
 homerouter.get("/movieyear",MovieSearchController.searchmoviesbyyear)
 homerouter.get("/movieactor",MovieSearchController.searchmoviesbyactor)
-homerouter.get("/movie/:moviename",MovieSearchController.movieclicked)
+homerouter.get("/movie/:imdbID",MovieSearchController.movieclicked)
 
 homerouter.get("/wikis", UserwikiController.displayallwikis)
 homerouter.post("/addwiki",UserwikiController.insertdataintowiki)
-
 homerouter.get("/searchwiki",UserwikiController.searchforatopic)
+//actors
+homerouter.get("/actor/name", ActorController.actornamesearch)
+homerouter.get("/actor", ActorController.actorpagination)
+homerouter.get("/actor/:imdbID", ActorController.getSingleactor)
 
 module.exports=homerouter

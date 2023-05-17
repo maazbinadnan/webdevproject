@@ -31,11 +31,9 @@
   left: 0;
   width: 100vw;
   height: 100vh;
+  background-color: white;
 
 }
-
-
-
 .text {
   position: absolute;
   width: 50%;
@@ -64,6 +62,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 
 
 }

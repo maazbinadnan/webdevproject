@@ -3,53 +3,62 @@ import React, { useEffect, useState } from "react";
 import "./singlemovie.css"
 import { Navbar } from "./navigationbar";
 import { useNavigate, useParams } from "react-router-dom";
-import { Backdrop, Button, Paper, Rating, TextField } from "@mui/material";
-import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
+import { Backdrop, Button, Paper, Rating, TextField, IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+import { Link } from "react-router-dom";
+import { Grid } from "@mui/material";
 
-function ReviewMovie({ movie, onclose}) {
+function ReviewMovie({ movie, onclose }) {
   const [rating, Setrating] = useState(movie[0].Rating)
-  const [review, Setreview] =useState(movie[0].Review)
+  const [review, Setreview] = useState(movie[0].Review)
+
   const token = localStorage.getItem('token')
   let data = {
-    rating:  rating,
+    rating: rating,
     comments: review
   };
-   const handleclick=()=>{
-    
+  const handleclick = () => {
+
     console.log(rating)
     console.log(review)
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
       url: `http://localhost:5000/user/addreview/?movieID=${movie[0].movieID}`,
-      headers: { 
-        'Content-Type': 'application/x-www-form-urlencoded', 
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': `Bearer ${token}`
       },
-      data : data
+      data: data
     };
-    
+
     axios.request(config)
-    .then((response) => {
-      console.log(JSON.stringify(response.data));
-      alert(JSON.stringify(response.data))
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        alert(JSON.stringify(response.data))
+        window.location.reload()
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     onclose()
   }
   return (
-    <div className="postmovie">
+    <div className="postmoviereview">
       <Paper sx={{ position: 'absolute', backgroundColor: '#706c61', top: '25%', width: '30%', height: '50%', left: '35%' }} elevation={24}>
-      <div className="newrating">
-        <Rating size="large" name="half-rating" value={rating} onChange={(event, newValue) => Setrating(newValue)} precision={0.5}
-          sx={{
-            '& .MuiRating-iconFilled': {
-              color: '#d5b942', // change to your desired color
-            },
-          }} />
-          </div>
+        <div>
+          <IconButton onClick={onclose} sx={{ position: 'absolute', top: '0%', right: '0%' }}>
+            <CloseIcon />
+          </IconButton>
+        </div>
+        <div className="newrating">
+          <Rating size="large" name="half-rating" value={rating} onChange={(event, newValue) => Setrating(newValue)} precision={0.5}
+            sx={{
+              '& .MuiRating-iconFilled': {
+                color: '#d5b942', // change to your desired color
+              },
+            }} />
+        </div>
         <div>
           <h2 style={
             {
@@ -97,7 +106,7 @@ function ReviewMovie({ movie, onclose}) {
 
         </div>
         <div className="submitreview">
-          <Button onClick={handleclick} variant="filled" size="large" sx={{ color: 'white', backgroundColor: '#660C97',border: '2px solid #660C97' }}>
+          <Button onClick={handleclick} variant="filled" size="large" sx={{ color: 'white', backgroundColor: '#660C97', border: '2px solid #660C97' }}>
             Submit
           </Button>
         </div>
@@ -131,8 +140,13 @@ function DisplayMoviePoster({ movie }) {
       <div className="releasedate">
         <p style={{ fontFamily: 'Inter', color: 'white' }}>Release Date: <b>{movie[0].releaseDate}</b></p>
       </div>
-      <div className="actors">
-        <p style={{ fontFamily: 'Inter', color: 'white' }}>Actors: <b>{movie[0].Actors}</b></p>
+      <div className="actorsinmovie">
+        <p style={{ fontFamily: 'Inter', color: 'white' }}>Actors: {movie[0].Actors.split(',').map(actor => {
+          const name = actor.split('--')[0].trim();
+          return <b>{name}, </b>
+        })}
+        </p>
+
       </div>
       <div className="director">
         <p style={{ fontFamily: 'Inter', color: 'white' }}>Director: <b>{movie[0].movieDirector}</b></p>
@@ -140,7 +154,7 @@ function DisplayMoviePoster({ movie }) {
       <div className="genre">
         <p style={{ fontFamily: 'Inter', color: 'white' }}>Genre: <b>{movie[0].genre}</b></p>
       </div>
-      <div className="poster">
+      <div>
         <img src={`${movie[0].photourl}`} alt={movie[0].movieName} title={movie[0].movieName} className="image" />
       </div>
       <Paper className="review" elevation={24} sx={{ backgroundColor: '#323433' }}>
@@ -165,38 +179,97 @@ function DisplayMoviePoster({ movie }) {
             </Button>
           ) : (
             <Button onClick={handleOpen} variant="filled" size="large" sx={{ color: 'white', backgroundColor: '#660C97', width: '100%', border: '2px solid #660C97' }}>
-              Log
+              Log Review
             </Button>
           )}
           <Backdrop
             open={open}
-            
+
           >
-            <ReviewMovie movie={movie}  onclose={handleClose} />
+            <ReviewMovie movie={movie} onclose={handleClose} />
           </Backdrop>
         </div>
 
       </Paper>
 
+
+    </div>
+  );
+}
+
+function RenderBottomimages({ actors, token }) {
+
+  const [actorphotos, setactorphotos] = useState([]);
+  useEffect(() => {
+    console.log(actors)
+    if (!actors.length) {
+
+      console.log("loading")
+    } else {
+      const photoUrls = [];
+      actors.map((actor) => {
+        console.log("actor is " + actor)
+        let config = {
+          method: 'get',
+          maxBodyLength: Infinity,
+          url: `http://localhost:5000/user/actor/${actor}`,
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        };
+
+        axios.request(config)
+          .then((response) => {
+
+            photoUrls.push(response.data.result[0]);
+            if (photoUrls.length === actors.length) {
+              setactorphotos(photoUrls);
+              console.log(actorphotos)
+            }
+
+          })
+
+          .catch((error) => {
+            console.log(error);
+          });
+      })
+    }
+  }, [actors])
+  if (!actors) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="actorimagediv">
+      <Grid container sx={{ height: '100%', width: '100%' }}>
+        {actorphotos.map((actors) => (
+          <Grid item key={actors.actors} xs={4} md={2} sx={{ margin: 0 }}>\
+            <Link to={`/actor/${actors.imdbID}`}>
+              <img src={actors.photourl} alt={actors.actorname} title={actors.actorname} className="actoridentifier" />
+            </Link>
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 }
 
 
 export function Singlemovie() {
-  const { moviename } = useParams()
+  const { imdbID } = useParams()
+  const [actorIDs, setActorIDs] = useState([]);
   const [movie, setMovie] = useState(null);
   const token = localStorage.getItem('token')
   if (!token) {
     window.location.assign('/login')
   }
   useEffect(() => {
-  
-    
+
+
     let config = {
       method: 'get',
       maxBodyLength: Infinity,
-      url: `http://localhost:5000/user/movie/${moviename}`,
+      url: `http://localhost:5000/user/movie/${imdbID}`,
       headers: {
         'Authorization': `Bearer ${token}`
       }
@@ -205,6 +278,11 @@ export function Singlemovie() {
     axios.request(config)
       .then((response) => {
         console.log(response.data.result);
+
+        // console.log(response.data.result[0].Actors.split(", ").map(actor => actor.split("-")[1]))
+        const actorids = response.data.result[0].Actors.split(", ").map(actor => actor.split("--")[1])
+        setActorIDs(actorids)
+        console.log("actor ids are" + actorIDs)
         setMovie(response.data.result);
 
       })
@@ -217,8 +295,18 @@ export function Singlemovie() {
   }, [])
   return (
     <div>
-      <DisplayMoviePoster movie={movie} ></DisplayMoviePoster>
+
+      <DisplayMoviePoster movie={movie} >
+
+      </DisplayMoviePoster>
       <Navbar />
+
+      <div style={{ position: 'absolute', height: '1.5px', top: '80%', backgroundColor: 'white', left: '10%', right: '8.65%' }}>
+        <RenderBottomimages actors={actorIDs} token={token} ></RenderBottomimages>
+      </div>
+      <p style={{
+        position: 'absolute', top: '75%', left: '10%', right: '8.65%', fontSize: '20px', color: 'white', fontWeight: 'bold', fontFamily: 'Blackpast Demo'
+      }}>Cast</p>
     </div>
   )
 }
