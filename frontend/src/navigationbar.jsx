@@ -2,9 +2,15 @@ import "./navbar.css"
 import { useState } from "react";
 import axios from "axios";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { AppBar, Toolbar, Button, InputBase, styled, alpha, Drawer, Box, List, Paper, TextField, Backdrop, Typography, IconButton, Avatar } from "@mui/material";
+import { AppBar, Toolbar, Button, InputBase, styled, alpha, Drawer, Box, List, Paper, TextField, Backdrop, Typography, IconButton, Avatar, Icon } from "@mui/material";
 import SearchIcon from '@mui/icons-material/Search';
 import CloseIcon from '@mui/icons-material/Close';
+import LogoutIcon from '@mui/icons-material/Logout';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import MovieCreationIcon from '@mui/icons-material/MovieCreation';
+import KeyIcon from '@mui/icons-material/Key';
+import MailIcon from '@mui/icons-material/Mail';
+
 
 import { useEffect } from "react";
 import jwtDecode from "jwt-decode";
@@ -66,28 +72,28 @@ function UserAccountDrawer({ drawerisopen, closedrawer }) {
 
 
     return (
-        <div className="DRAWER">
+        <div>
             <Drawer
                 anchor="right"
                 open={drawerisopen}
                 onClose={closedrawer}
             >
-                <Box sx={{ width: '250px' }} role="presentation">
+                <Box sx={{ width: '250px' }} role="presentation" >
                     <List >
                         <Button onClick={openEmailBackdropHandler} variant="outlined" sx={{ color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }} >
-                            Change Email
+                        <MailIcon style={{margin:'5px'}}/>  Change Email
                         </Button>
                         <Button onClick={openPasswordBackdropHandler} variant="outlined" sx={{ color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }} >
-                            Change Password
+                        <KeyIcon style={{margin:'5px'}}/>  Change Password
                         </Button>
                         <Button onClick={openMovieBackdropHandler} variant="outlined" sx={{ color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }} >
-                            Request Movie
+                        <MovieCreationIcon style={{margin:'5px'}}/> Request Movie
                         </Button>
                         <Button onClick={openBlogPostBackdropHandler} variant="outlined" sx={{ color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }} >
-                            Request Blog Post
+                           <PostAddIcon style={{margin:'5px'}}/> Request Blog Post
                         </Button>
-                        <Button onClick={logoutbutton} variant="outlined" sx={{ color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }} >
-                            Logout
+                        <Button onClick={logoutbutton} variant="outlined" sx={{color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }} >
+                        <LogoutIcon style={{margin:'5px'}}/>Logout
                         </Button>
                         {admin && (
                             <div>
@@ -95,7 +101,7 @@ function UserAccountDrawer({ drawerisopen, closedrawer }) {
                             </div>
                         )}
                     </List>
-
+                    
                 </Box>
             </Drawer>
             <Backdrop open={openEmailBackdrop || openBlogPostBackdrop || openMovieBackdrop || openPasswordBackdrop || userdeleteBackdrop}>
@@ -1031,7 +1037,7 @@ export function Navbar() {
                     {!admin && (
                         <div>
                             <div>
-                                <Link className="home">
+                                <Link className="home" to ={'/home'}>
                                     Home
                                 </Link>
                             </div>

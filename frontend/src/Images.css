@@ -4,7 +4,7 @@
     height: 100vh;
   }
 
-  
+
 
   .images {
     width: 140px;
@@ -12,35 +12,52 @@
     border: solid #9612dd;
     object-fit: cover;
     cursor: pointer;
-    &:hover{
-        transform: scale(1.05);
-        z-index: 1;
+
+    &:hover {
+      transform: scale(1.05);
+      z-index: 1;
     }
-    
+
+    box-shadow: 0 0 20px 0 #9612dd;
+
+
   }
+
   .actorimages {
     width: 140px;
     height: 192px;
-    border: 3px solid  #9612dd;
+    border: 3px solid #9612dd;
     object-fit: cover;
     cursor: pointer;
-    &:hover{
-        transform: scale(1.05);
-        z-index: 1;
+
+    &:hover {
+      transform: scale(1.05);
+      z-index: 1;
     }
   }
+
   .imagelist {
     position: absolute;
     left: 8.28%;
     right: 8.33%;
     top: 20%;
 
+
   }
+
+  .homeimagelist {
+
+    position: absolute;
+    left: 8.28%;
+    right: 8.33%;
+    top: 30%;
+  }
+
 
   .sort {
     position: absolute;
     top: 12.5%;
-    left: 14.8%;
+    left: 15%;
 
 
   }
@@ -56,9 +73,7 @@
     top: 13%;
     left: 45%;
     height: 45px;
-    
+
     width: 8%;
-    
+
   }
-  
-  

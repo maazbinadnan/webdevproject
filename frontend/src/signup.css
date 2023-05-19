@@ -1,7 +1,7 @@
 .body {
     position: absolute;
     background-color: #f8f4e3;
-    height: 100vh;
+    height: 100%;
     left: 50%;
     width: 50%;
 }

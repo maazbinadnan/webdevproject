@@ -138,7 +138,10 @@ function DisplayMoviePoster({ movie }) {
         <p style={{ fontFamily: 'Inter', color: 'white' }}><b>{movie[0].overview}</b></p>
       </div>
       <div className="releasedate">
-        <p style={{ fontFamily: 'Inter', color: 'white' }}>Release Date: <b>{movie[0].releaseDate}</b></p>
+        <p style={{ fontFamily: 'Inter', color: 'white' }}>
+          Release Date: <b>{new Date(movie[0].releaseDate).toLocaleDateString()}</b>
+        </p>
+
       </div>
       <div className="actorsinmovie">
         <p style={{ fontFamily: 'Inter', color: 'white' }}>Actors: {movie[0].Actors.split(',').map(actor => {
@@ -178,7 +181,7 @@ function DisplayMoviePoster({ movie }) {
               Edit Review
             </Button>
           ) : (
-            <Button onClick={handleOpen} variant="filled" size="large" sx={{ color: 'white', backgroundColor: '#660C97', width: '100%', border: '2px solid #660C97' }}>
+            <Button  onClick={handleOpen} variant="filled" size="large" sx={{ color: 'white', backgroundColor: '#660C97', width: '100%', border: '2px solid #660C97' }}>
               Log Review
             </Button>
           )}

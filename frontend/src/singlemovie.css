@@ -26,6 +26,7 @@
     top: 7.76%;
     bottom: 7.76%;
     border: 3px solid #9612dd;
+    box-shadow: 0 0 20px 0 #9612dd;
 }
 
 .moviedesc {
@@ -155,17 +156,8 @@
     object-fit: cover;
 
 }
-.moviesactedin{
-    position: absolute;
-    left: 20%;
-    top: 40%;
-    width: 30%;
-    height: 10%;
-    border: 3px solid #9612dd;
-    object-fit: cover;
-}
+
 .singlemovieidentifier{
-    
     width: 140px;
     height: 192px;
     border: 3px solid #9612dd;

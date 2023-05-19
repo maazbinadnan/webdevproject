@@ -106,7 +106,7 @@ export default function Signup() {
                 if (response.data.token) {
                     console.log(response.data.token)
                     localStorage.setItem('token', response.data.token)
-                    window.location.assign('/movies')
+                    window.location.assign('/home')
                 } else {
                     alert(JSON.stringify(response.data))
                 }
@@ -192,6 +192,8 @@ export default function Signup() {
                         >
                             {loading ? 'Loading...' : 'Sign Up'} {/* change button text during loading */}
                         </Button>
+                        
+                        <p style={{position:'absolute', bottom:'0%', left:'28%'}} >Already have an account? <a href='/login'>Login</a></p>
 
                     </Paper>
                 </div>

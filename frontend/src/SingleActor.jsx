@@ -1,13 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import "./singleactor.css"
 import "./singlemovie.css"
 import { Navbar } from "./navigationbar";
 import { useNavigate, useParams } from "react-router-dom";
-import { Backdrop, Button, Paper, Rating, TextField, IconButton } from "@mui/material";
-import CloseIcon from '@mui/icons-material/Close';
+
 import { Link } from "react-router-dom";
-import { Grid } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 
 
 
@@ -18,29 +17,31 @@ function DisplayActorPoster({ actor }) {
     return <div>Loading...</div>;
   }
   return (
-    <div className="moviedetails">
-      <div className="movietitle">
+    <div className="actordetails">
+      
+      <Paper sx={{ position: 'absolute', width: '35%', height: '100%', top: '15%', left: '32%', backgroundColor: 'black', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div className="actorname">
         <h1 style={{ fontFamily: 'Blackpast Demo', color: 'white' }}>{actor[0].actorname}</h1>
       </div>
-      <div className="moviedesc">
-        <h2 style={{ color: 'white' }}>Birthday</h2>
-        <p style={{ fontFamily: 'Inter', color: 'white' }}><b>{new Date(actor[0].birthdate).toLocaleDateString()}</b></p>
+        <div className="actorbday">
+        <p style={{ fontFamily: 'Inter', color: 'white' }}>Birthday:<b>{new Date(actor[0].birthdate).toLocaleDateString()} </b></p>
 
       </div>
-      <div className="releasedate">
-        <p style={{ fontFamily: 'Inter', color: 'white' }}>BirthPlace: <b>{actor[0].birthplace}</b></p>
+      <div className="birthplace">
+        <p style={{ fontFamily: 'Inter', color: 'white' }}>Nationality  : <b>{actor[0].birthplace}</b></p>
       </div>
-      <div className="actorsinmovie">
+      <div className="gender">
         <p style={{ fontFamily: 'Inter', color: 'white' }}>Gender: <b>{actor[0].gender}</b></p>
       </div>
 
-      <div className="director">
+      <div className="actorimdbid">
         <p style={{ fontFamily: 'Inter', color: 'white' }}>IMDB ID: <b>{actor[0].imdbID}</b></p>
       </div>
+      </Paper>
       <div>
-        <img src={`${actor[0].photourl}`} alt={actor[0].actorName} title={actor[0].actorName} className="image" />
-      </div>
+        <img src={`${actor[0].photourl}`} alt={actor[0].actorName} title={actor[0].actorName} className="actorposter" />
 
+      </div>
 
     </div>
   );
@@ -52,7 +53,7 @@ function RenderBottomimages({ movieid, token }) {
   useEffect(() => {
     const photoUrls = [];
     movieid.map((movies) => {
-      // console.log("movie is " + movies)
+      
       let config = {
         method: 'get',
         maxBodyLength: Infinity,

@@ -100,6 +100,12 @@ export default function SearchPost() {
   return (
     <div>
       <Navbar />
+      <div style={{ position: 'absolute', height: '1.5px', top: '19%', backgroundColor: 'white', left: '8.8%', right: '8.65%' }}>
+
+      </div>
+      <p style={{
+        position: 'absolute', top: '12.5%', left: '8.8%', right: '8.65%', fontSize: '20px', color: 'white', fontWeight: 'bold', fontFamily: 'Blackpast Demo'
+      }}>All Posts with</p>
       <div className='grid'>
         <Grid container spacing={2}>
           {posts.map((post, index) => (

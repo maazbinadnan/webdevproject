@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 
 function Addwiki({ title, username, index, token }) {
     const handleclick = () => {
-        let data ={
+        let data = {
             title: title,
             username: username
-            
+
         }
         console.log(data)
         let config = {
@@ -84,8 +84,16 @@ export default function Wikistoapprove() {
         <div>
             <Navbar />
 
-            <div style={{ position: 'absolute', top: '13%', left: '10%', right: '10%' }}>
+            <div style={{ position: 'absolute', height: '1.5px', top: '19%', backgroundColor: 'white', left: '8.8%', right: '8.65%' }}>
+
+            </div>
+            <p style={{
+                position: 'absolute', top: '12.5%', left: '8.8%', right: '8.65%', fontSize: '20px', color: 'white', fontWeight: 'bold', fontFamily: 'Blackpast Demo'
+            }}>Posts Waiting for approval</p>
+
+            <div style={{ position: 'absolute', top: '20%', left: '9%', right: '10%' }}>
                 <Grid container spacing={2} rowSpacing={6}>
+
                     {posts.slice(1).map((post, index) => (
                         <Grid key={index} item xs={12} sm={6} md={4}>
                             <Card sx={{ width: 'auto', height: '100%' }}>
@@ -99,7 +107,7 @@ export default function Wikistoapprove() {
                                     </Typography>
                                 </CardContent>
                             </Card>
-                            <Addwiki index={index}  token ={token} title={post.title} username={post.username} />
+                            <Addwiki index={index} token={token} title={post.title} username={post.username} />
                         </Grid>
                     ))}
                 </Grid>

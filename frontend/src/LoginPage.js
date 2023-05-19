@@ -4,7 +4,7 @@ import { Paper, TextField, ToggleButtonGroup, ToggleButton } from '@mui/material
 import React from 'react'
 import { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 
 export function Login() {
   const [admin, setAdmin] = useState(false)
@@ -82,7 +82,7 @@ export function Login() {
             alert(response.data)
           } else {
             localStorage.setItem('token', response.data.token)
-            window.location.assign('/movies')
+            window.location.assign('/home')
           }
         })
         .catch((error) => {
@@ -127,23 +127,39 @@ export function Login() {
             onClick={handlelogin}
             disabled={loading} // added to disable button during loading
             sx={{ mt: 2, backgroundColor: '#9612dd', width: '35%' }}>
-            {loading ? 'Logging in...' : 'Login'} {/* updated to show loading indicator */}
+            {loading ? 'Logging in...' : 'Login'}
           </Button>
-          {error && <p className="error">{error}</p>} {/* added to show error message */}
+          {error && <p className="error">{error}</p>} 
+          <p style={{position:'absolute', bottom:'5%'}}>Don't have an account? <Link to="/signup"> Sign Up </Link></p>
         </Paper>
       </form>
       <ToggleButtonGroup
-        sx={{ position: 'absolute', top: '30%', backgroundColor: '#9612dd', borderRadius: '3px' }}
+        sx={{ position: 'absolute', top: '28%', backgroundColor: '#9612dd', borderRadius: '3px' }}
         size="small"
         exclusive
         value={admin}
         onChange={(event, isadmin) => setAdmin(isadmin)}
         aria-label="text alignment"
       >
-        <ToggleButton value={true} sx={{ width: '60px' }}>
+        <ToggleButton value={true} sx={{
+              bgcolor: admin === true ? "#9612dd" : "white",
+              color: admin===true ? "white" : "inherit",
+              borderLeft: '2.5px solid #9612dd',
+              borderRight: '2.5px solid #9612dd',
+              fontSize:'16px',
+              fontFamily:'Blackpast Demo'
+            }}
+        >
           <b>Admin</b>
         </ToggleButton>
-        <ToggleButton value={false} sx={{ width: '60px' }}>
+        <ToggleButton value={false} sx={{
+              bgcolor: admin === false ? "#9612dd" : "white",
+              color: admin===false ? "white" : "inherit",
+              borderLeft: '2.5px solid #9612dd',
+              borderRight: '2.5px solid #9612dd',
+              fontSize:'16px',
+              fontFamily:'Blackpast Demo'
+            }}>
           <b>User</b>
         </ToggleButton>
       </ToggleButtonGroup>

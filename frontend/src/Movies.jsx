@@ -178,7 +178,7 @@ export function Movies() {
       </div>
       <p style={{
         position: 'absolute', top: '12.5%', left: '8.8%', right: '8.65%', fontSize: '20px', color: 'white', fontWeight: 'bold',fontFamily:'Blackpast Demo'
-      }}>Sort By</p>
+      }}>Sort By:</p>
         <p style={{
         position: 'absolute', top: '12.5%', left: '39.25%', fontSize: '20px', color: 'white', fontWeight: 'bold', fontFamily:'Blackpast Demo'
       }}>Select:</p>
