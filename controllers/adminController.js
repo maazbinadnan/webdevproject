@@ -7,7 +7,7 @@ const wikis = require('../databases/mongowikischema');
 
 async function getconnection() {
     try {
-        const mongoconnection = await mongoose.connect(`mongodb+srv://maazparacha:maazadnan123@cluster0.ki1sv6q.mongodb.net/CinephileCollective?retryWrites=true&w=majority`)
+        const mongoconnection = await mongoose.connect(process.env.mongoadminuri)
         if (mongoose.connection.readyState === 1) {
             console.log('Database connected successfully.');
         } else {

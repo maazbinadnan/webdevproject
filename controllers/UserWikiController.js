@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 async function getconnection(){
 try {
     console.log("hi")
-    const mongoconnection= await mongoose.connect(`mongodb+srv://${process.env.mongousername}:${process.env.mongopassword}@cluster0.ki1sv6q.mongodb.net/CinephileCollective?retryWrites=true&w=majority`)
+    const mongoconnection= await mongoose.connect(process.env.mongouseruri)
     if(mongoose.connection.readyState === 1) {
         console.log('Database connected successfully.');
       } else {
