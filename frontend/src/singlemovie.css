@@ -154,6 +154,10 @@
     height: 192px;
     border: 3px solid #9612dd;
     object-fit: cover;
+    &:hover {
+        transform: scale(1.05);
+        z-index: 1;
+      }
 
 }
 

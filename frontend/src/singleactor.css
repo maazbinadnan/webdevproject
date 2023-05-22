@@ -81,6 +81,10 @@
     right: 5%;
     width: 30%;
     height: 70%;
-    
-    
+}
+.singlemovieidentifier{
+    &:hover {
+        transform: scale(1.05);
+        z-index: 1;
+      }
 }

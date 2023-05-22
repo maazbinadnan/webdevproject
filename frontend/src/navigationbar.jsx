@@ -81,19 +81,24 @@ function UserAccountDrawer({ drawerisopen, closedrawer }) {
                 <Box sx={{ width: '250px' }} role="presentation" >
                     <List >
                         <Button onClick={openEmailBackdropHandler} variant="outlined" sx={{ color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }} >
-                        <MailIcon style={{margin:'5px'}}/>  Change Email
+                            <MailIcon style={{ margin: '5px' }} />  Change Email
                         </Button>
                         <Button onClick={openPasswordBackdropHandler} variant="outlined" sx={{ color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }} >
-                        <KeyIcon style={{margin:'5px'}}/>  Change Password
+                            <KeyIcon style={{ margin: '5px' }} />  Change Password
                         </Button>
-                        <Button onClick={openMovieBackdropHandler} variant="outlined" sx={{ color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }} >
-                        <MovieCreationIcon style={{margin:'5px'}}/> Request Movie
-                        </Button>
-                        <Button onClick={openBlogPostBackdropHandler} variant="outlined" sx={{ color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }} >
-                           <PostAddIcon style={{margin:'5px'}}/> Request Blog Post
-                        </Button>
-                        <Button onClick={logoutbutton} variant="outlined" sx={{color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }} >
-                        <LogoutIcon style={{margin:'5px'}}/>Logout
+                        {!admin && (
+                            <div>
+                                <Button onClick={openMovieBackdropHandler} variant="outlined" sx={{ color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }}>
+                                    <MovieCreationIcon style={{ margin: '5px' }} /> Request Movie
+                                </Button>
+                                <Button onClick={openBlogPostBackdropHandler} variant="outlined" sx={{ color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }}>
+                                    <PostAddIcon style={{ margin: '5px' }} /> Request Blog Post
+                                </Button>
+                            </div>
+                        )}
+
+                        <Button onClick={logoutbutton} variant="outlined" sx={{ color: 'white', backgroundColor: 'black', width: '100%', marginTop: '10%', borderRadius: '0px', border: '3px solid black' }} >
+                            <LogoutIcon style={{ margin: '5px' }} />Logout
                         </Button>
                         {admin && (
                             <div>
@@ -101,7 +106,7 @@ function UserAccountDrawer({ drawerisopen, closedrawer }) {
                             </div>
                         )}
                     </List>
-                    
+
                 </Box>
             </Drawer>
             <Backdrop open={openEmailBackdrop || openBlogPostBackdrop || openMovieBackdrop || openPasswordBackdrop || userdeleteBackdrop}>
@@ -879,36 +884,27 @@ function RequestMovie({ closebackdrop }) {
                     />
                 </div>
                 <div>
-                    <TextField
-                        sx={{
-                            position: "absolute",
+                    <input
+                        type="date"
+                        style={{
+                            position: 'absolute',
                             fontFamily: 'Inter',
                             textAlign: 'left',
                             marginTop: '80%',
                             width: '90%',
+                            height:'10%',
                             borderRadius: '5px',
-                            fontSize: '50px',
+                            fontSize: '20px',
                             left: '5%',
-
-                            color: 'white',
-                            '& .MuiOutlinedInput-root': {
-                                '& fieldset': {
-                                    borderColor: 'white',
-                                },
-                                '&:hover fieldset': {
-                                    borderColor: 'black',
-                                },
-                                '&.Mui-focused fieldset': {
-                                    borderColor: 'black',
-                                },
-                            },
+                            color: 'black',
+                            backgroundColor:'grey',
+                            border:'2px solid white'
                         }}
                         required
-                        variant="outlined"
                         value={releaseDate}
                         onChange={(e) => setReleaseDate(e.target.value)}
-                        label="Release Date"
                     />
+
                 </div>
                 <Button
                     variant="filled"
@@ -1037,7 +1033,7 @@ export function Navbar() {
                     {!admin && (
                         <div>
                             <div>
-                                <Link className="home" to ={'/home'}>
+                                <Link className="home" to={'/home'}>
                                     Home
                                 </Link>
                             </div>

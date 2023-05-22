@@ -20,17 +20,16 @@
 
 
 .divcenter {
-  position: relative;
+  position: fixed;
   display: flex;
-  background-image: url('../background-final-min.jpg');
+   background-image: url('../background-final-min.jpg');
   background-size: cover;
   background-position: center center;
   justify-content: center;  
   align-items: top center;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
+  
+  width: 100%;
+  height: 100%;
   background-color: white;
 
 }

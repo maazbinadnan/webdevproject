@@ -4,6 +4,7 @@ import './blogs.css'
 import { Navbar } from './navigationbar';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import jwtDecode from 'jwt-decode';
 
 function Addwiki({ title, username, index, token }) {
     const handleclick = () => {
@@ -50,6 +51,12 @@ export default function Wikistoapprove() {
     if (!token) {
         window.location.assign('/login')
     }
+    //write code that if jwt decodede token user == cinephile then it redirects to home page
+    const decoded = jwtDecode(token);
+    if (decoded.user === 'cinephile') {
+        window.location.assign('/home')
+    }
+
 
     useEffect(() => {
         let config = {

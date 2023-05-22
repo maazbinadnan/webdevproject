@@ -145,10 +145,12 @@ export function Singleactor() {
 
   }, [])
   return (
+    <body className="noscroll">
     <div>
       <DisplayActorPoster actor={actors}></DisplayActorPoster>
       <Navbar />
       <RenderBottomimages movieid={movieIDs} token={token} ></RenderBottomimages>
     </div>
+    </body>
   )
 }
